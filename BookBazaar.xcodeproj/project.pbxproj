@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC32D50A19F973D1006240EB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32D50919F973D1006240EB /* LoginViewController.m */; };
 		FCAC757919E70B8500AA6AE7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAC757819E70B8500AA6AE7 /* main.m */; };
 		FCAC757C19E70B8500AA6AE7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAC757B19E70B8500AA6AE7 /* AppDelegate.m */; };
 		FCAC757F19E70B8500AA6AE7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAC757E19E70B8500AA6AE7 /* ViewController.m */; };
@@ -27,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC32D50919F973D1006240EB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		FC32D50B19F9740E006240EB /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		FCAC757319E70B8500AA6AE7 /* BookBazaar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookBazaar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCAC757719E70B8500AA6AE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCAC757819E70B8500AA6AE7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -85,6 +88,8 @@
 				FCAC757B19E70B8500AA6AE7 /* AppDelegate.m */,
 				FCAC757D19E70B8500AA6AE7 /* ViewController.h */,
 				FCAC757E19E70B8500AA6AE7 /* ViewController.m */,
+				FC32D50B19F9740E006240EB /* LoginViewController.h */,
+				FC32D50919F973D1006240EB /* LoginViewController.m */,
 				FCAC758019E70B8500AA6AE7 /* Main.storyboard */,
 				FCAC758319E70B8500AA6AE7 /* Images.xcassets */,
 				FCAC758519E70B8500AA6AE7 /* LaunchScreen.xib */,
@@ -219,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC32D50A19F973D1006240EB /* LoginViewController.m in Sources */,
 				FCAC757F19E70B8500AA6AE7 /* ViewController.m in Sources */,
 				FCAC757C19E70B8500AA6AE7 /* AppDelegate.m in Sources */,
 				FCAC757919E70B8500AA6AE7 /* main.m in Sources */,
@@ -412,6 +418,7 @@
 				FCAC759819E70B8500AA6AE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FCAC759919E70B8500AA6AE7 /* Build configuration list for PBXNativeTarget "BookBazaarTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +427,7 @@
 				FCAC759B19E70B8500AA6AE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
