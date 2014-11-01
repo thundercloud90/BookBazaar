@@ -8,11 +8,15 @@
 
 #import "LoginViewController.h"
 
+
+
 @interface LoginViewController ()
 
 @end
 
 @implementation LoginViewController
+@synthesize uNameTextField;
+@synthesize pWordTextField;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,5 +27,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)submitButton:(id)sender {
+    NSString *username = self.uNameTextField.text;
+    NSString *password = self.pWordTextField.text;
+    NSLog(@"Here!: %@, %@", username, password);
+}
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.uNameTextField resignFirstResponder];
+    [self.pWordTextField resignFirstResponder];
+
+}
 @end
