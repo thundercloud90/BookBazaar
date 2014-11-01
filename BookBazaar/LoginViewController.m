@@ -31,6 +31,8 @@
     NSString *username = self.uNameTextField.text;
     NSString *password = self.pWordTextField.text;
     NSLog(@"Here!: %@, %@", username, password);
+    [self downloadItems];
+    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
