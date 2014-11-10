@@ -16,6 +16,9 @@
 		FCAC758419E70B8500AA6AE7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCAC758319E70B8500AA6AE7 /* Images.xcassets */; };
 		FCAC758719E70B8500AA6AE7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAC758519E70B8500AA6AE7 /* LaunchScreen.xib */; };
 		FCAC759319E70B8500AA6AE7 /* BookBazaarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAC759219E70B8500AA6AE7 /* BookBazaarTests.m */; };
+		FCCE934A1A0E984A00B9F56F /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCE93491A0E984A00B9F56F /* RegisterViewController.m */; };
+		FCCE93501A0F0CB800B9F56F /* PostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCE934F1A0F0CB800B9F56F /* PostTableViewController.m */; };
+		FCCE93531A10435000B9F56F /* UserClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCE93521A10435000B9F56F /* UserClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +49,12 @@
 		FCAC758C19E70B8500AA6AE7 /* BookBazaarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookBazaarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCAC759119E70B8500AA6AE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCAC759219E70B8500AA6AE7 /* BookBazaarTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookBazaarTests.m; sourceTree = "<group>"; };
+		FCCE93481A0E984A00B9F56F /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		FCCE93491A0E984A00B9F56F /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		FCCE934E1A0F0CB800B9F56F /* PostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewController.h; sourceTree = "<group>"; };
+		FCCE934F1A0F0CB800B9F56F /* PostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewController.m; sourceTree = "<group>"; };
+		FCCE93511A10435000B9F56F /* UserClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserClass.h; sourceTree = "<group>"; };
+		FCCE93521A10435000B9F56F /* UserClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,9 +102,15 @@
 				FCAC757E19E70B8500AA6AE7 /* ViewController.m */,
 				FC32D50B19F9740E006240EB /* LoginViewController.h */,
 				FC32D50919F973D1006240EB /* LoginViewController.m */,
+				FCCE93481A0E984A00B9F56F /* RegisterViewController.h */,
+				FCCE93491A0E984A00B9F56F /* RegisterViewController.m */,
+				FCCE934E1A0F0CB800B9F56F /* PostTableViewController.h */,
+				FCCE934F1A0F0CB800B9F56F /* PostTableViewController.m */,
 				FCAC758019E70B8500AA6AE7 /* Main.storyboard */,
 				FC348D8D1A0410A300A6E4AB /* DBConnection.h */,
 				FC348D8B1A04108800A6E4AB /* DBConnection.m */,
+				FCCE93511A10435000B9F56F /* UserClass.h */,
+				FCCE93521A10435000B9F56F /* UserClass.m */,
 				FCAC758319E70B8500AA6AE7 /* Images.xcassets */,
 				FCAC758519E70B8500AA6AE7 /* LaunchScreen.xib */,
 				FCAC757619E70B8500AA6AE7 /* Supporting Files */,
@@ -229,7 +244,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCCE93531A10435000B9F56F /* UserClass.m in Sources */,
 				FC32D50A19F973D1006240EB /* LoginViewController.m in Sources */,
+				FCCE93501A0F0CB800B9F56F /* PostTableViewController.m in Sources */,
+				FCCE934A1A0E984A00B9F56F /* RegisterViewController.m in Sources */,
 				FC348D8C1A04108800A6E4AB /* DBConnection.m in Sources */,
 				FCAC757F19E70B8500AA6AE7 /* ViewController.m in Sources */,
 				FCAC757C19E70B8500AA6AE7 /* AppDelegate.m in Sources */,

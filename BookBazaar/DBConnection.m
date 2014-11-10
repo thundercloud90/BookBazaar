@@ -9,7 +9,7 @@
 #import "DBConnection.h"
 
 
-@interface LoginModel()
+@interface DataModel()
 {
     NSMutableData *_downloadedData;
     NSString *username;
@@ -17,18 +17,17 @@
 }
 @end
 
-@implementation LoginModel
+@implementation DataModel
 
 - (void)downloadItems
 {
     // Download the json file
-    NSURL *jsonFileUrl = [NSURL URLWithString:@"http://gtvinyl.com/service.php"];
-    
-    // Create the request
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM user"];
+    NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
-    
-    // Create the NSURLConnection
     [NSURLConnection connectionWithRequest:urlRequest delegate:self];
+
 }
 
 #pragma mark NSURLConnectionDataProtocol Methods
@@ -59,11 +58,16 @@
     {
         NSDictionary *jsonElement = jsonArray[i];
         
-        // Create a new location object and set its props to JsonElement properties
-        username = jsonElement[@"Username"];
-        password = jsonElement[@"Password"];
+        UserClass *userinfo = [[UserClass alloc] init];
+        userinfo.firstName = jsonElement[@"firstName"];
+        userinfo.lastName = jsonElement[@"lastName"];
+        userinfo.username = jsonElement[@"username"];
+        userinfo.emailAddr = jsonElement[@"emailAddr"];
+        userinfo.phoneNumber = jsonElement[@"phoneNumber"];
+        userinfo.city = jsonElement[@"city"];
+        userinfo.state = jsonElement[@"state"];
         
-        
+        [_user addObject:userinfo];
     }
     
     // Ready to notify delegate that data is ready and pass back items

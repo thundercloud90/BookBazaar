@@ -8,6 +8,7 @@
 
 
 #import <Foundation/Foundation.h>
+#import "UserClass.h"
 
 @protocol LoginProtocol <NSObject>
 
@@ -15,7 +16,7 @@
 
 @end
 
-@interface LoginModel : NSObject
+@interface DataModel : NSObject
 
 @property (nonatomic, weak) id<LoginProtocol> delegate;
 

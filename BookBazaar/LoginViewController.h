@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController <NSURLConnectionDelegate>
+{
+    bool validLogin;
+    NSMutableData *downloadedData;
+}
 @property (weak, nonatomic) IBOutlet UITextField *uNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pWordTextField;
+@property (weak, nonatomic) IBOutlet UILabel *invalidLoginLabel;
 
 
 @end

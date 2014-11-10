@@ -1,66 +1,55 @@
 //
-//  LoginViewController.m
+//  RegisterViewController.m
 //  BookBazaar
 //
-//  Created by Wade Wilkey on 23/10/2014.
+//  Created by Wade Wilkey on 8/11/2014.
 //  Copyright (c) 2014 Wade Wilkey. All rights reserved.
 //
 
-#import "LoginViewController.h"
+#import "RegisterViewController.h"
 
-
-
-@interface LoginViewController ()
+@interface RegisterViewController ()
 
 @end
 
-@implementation LoginViewController
-@synthesize uNameTextField;
-@synthesize pWordTextField;
+@implementation RegisterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [_invalidLoginLabel setHidden:true];
-    // Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view.
+    [_pwErrorLabel setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)submitButton:(id)sender {
-    NSString *username = self.uNameTextField.text;
-    NSString *password = self.pWordTextField.text;
-    NSLog(@"Here!: %@, %@", username, password);
-    [self downloadItems];
+
+- (IBAction)getUserInfo:(id)sender {
+    firstName = _firstNameTF.text;
+    lastName = _lastNameTF.text;
+    emailAddr = _emailAddrTF.text;
+    phoneNum = _phoneNumTF.text;
+    city = _cityTF.text;
+    state = @"UT";
+    username = _usernameTF.text;
+    password = _passwordTF.text;
+    NSString* passwordCheck = _rtPasswordTF.text;
+    if(![password isEqualToString:passwordCheck])
+    {
+        [_pwErrorLabel setHidden:NO];
+    }
     
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.uNameTextField resignFirstResponder];
-    [self.pWordTextField resignFirstResponder];
-
-}
-
--(void)validatePassword:(NSString *)correctPassword
-{
-    NSLog([NSString stringWithFormat:@"Entered: %@ Correct: %@", self.pWordTextField.text, correctPassword]);
-    if([correctPassword isEqualToString:self.pWordTextField.text])
-    {
-        [self.navigationController popViewControllerAnimated:TRUE];
-        NSLog(@"YAY!");
+    else{
+         NSLog(@"%@, %@, %@, %@", firstName, lastName, emailAddr, phoneNum);
     }
-    else
-    {
-        NSLog(@"BOO!");
-        [_invalidLoginLabel setHidden:false];
-    }
+    
+   
 }
 
--(void)downloadItems
+-(void)insertDBItems
 {
-    NSString * username = self.uNameTextField.text;
-    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT password FROM user WHERE username='%@'", username];
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=INSERT INTO user (username, password, firstName, lastName, emailAddr, phoneNumber, city, state) VALUES (%@, %@, %@, %@, %@, %@, %@, %@)", username, password, firstName, lastName, emailAddr, phoneNum, city, state];
     NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
@@ -93,11 +82,22 @@
         NSDictionary *jsonElement = jsonArray[i];
         
         correctPassword = jsonElement[@"password"];
-     
+        
     }
     
-    [self validatePassword:correctPassword];
+    
     
     // Ready to notify delegate that data is ready and pass back items
 }
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
 @end
