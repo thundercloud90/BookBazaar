@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DBConnection.h"
+#import "UserClass.h"
+//#import "DBConnection.h"
 
-@interface PostTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, LoginProtocol>
+@interface PostTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDelegate>
+{
+    NSMutableData *_downloadedData;
+    NSMutableArray *userInfo;
+    
+}
 
 
 @property (strong, nonatomic) IBOutlet UITableView *listTableView;

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		FC32D50A19F973D1006240EB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32D50919F973D1006240EB /* LoginViewController.m */; };
-		FC348D8C1A04108800A6E4AB /* DBConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = FC348D8B1A04108800A6E4AB /* DBConnection.m */; };
 		FCAC757919E70B8500AA6AE7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAC757819E70B8500AA6AE7 /* main.m */; };
 		FCAC757C19E70B8500AA6AE7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAC757B19E70B8500AA6AE7 /* AppDelegate.m */; };
 		FCAC757F19E70B8500AA6AE7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAC757E19E70B8500AA6AE7 /* ViewController.m */; };
@@ -34,8 +33,6 @@
 /* Begin PBXFileReference section */
 		FC32D50919F973D1006240EB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		FC32D50B19F9740E006240EB /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		FC348D8B1A04108800A6E4AB /* DBConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBConnection.m; sourceTree = "<group>"; };
-		FC348D8D1A0410A300A6E4AB /* DBConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBConnection.h; sourceTree = "<group>"; };
 		FCAC757319E70B8500AA6AE7 /* BookBazaar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookBazaar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCAC757719E70B8500AA6AE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCAC757819E70B8500AA6AE7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -107,8 +104,6 @@
 				FCCE934E1A0F0CB800B9F56F /* PostTableViewController.h */,
 				FCCE934F1A0F0CB800B9F56F /* PostTableViewController.m */,
 				FCAC758019E70B8500AA6AE7 /* Main.storyboard */,
-				FC348D8D1A0410A300A6E4AB /* DBConnection.h */,
-				FC348D8B1A04108800A6E4AB /* DBConnection.m */,
 				FCCE93511A10435000B9F56F /* UserClass.h */,
 				FCCE93521A10435000B9F56F /* UserClass.m */,
 				FCAC758319E70B8500AA6AE7 /* Images.xcassets */,
@@ -248,7 +243,6 @@
 				FC32D50A19F973D1006240EB /* LoginViewController.m in Sources */,
 				FCCE93501A0F0CB800B9F56F /* PostTableViewController.m in Sources */,
 				FCCE934A1A0E984A00B9F56F /* RegisterViewController.m in Sources */,
-				FC348D8C1A04108800A6E4AB /* DBConnection.m in Sources */,
 				FCAC757F19E70B8500AA6AE7 /* ViewController.m in Sources */,
 				FCAC757C19E70B8500AA6AE7 /* AppDelegate.m in Sources */,
 				FCAC757919E70B8500AA6AE7 /* main.m in Sources */,
