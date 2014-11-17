@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UserClass.h"
-//#import "DBConnection.h"
+#import "PostDetailsViewController.h"
 
 @interface PostTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDelegate>
 {

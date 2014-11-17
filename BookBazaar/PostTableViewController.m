@@ -43,6 +43,9 @@
 
 #pragma mark - Table view data source
 
+
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
@@ -165,14 +168,30 @@
  }
  */
 
-/*
+
  #pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+     
+     if([[segue identifier] isEqualToString:@"segue"])
+     {
+         NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+         PostDetailsViewController *vc;
+         vc = [segue destinationViewController];
+        
+         UserClass *userObj = userInfo[path.row];
+         vc.userObject = userObj;
+     }
+
+     else{
+         NSLog(@"%@", @"error");
+     }
+     
+     
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
  }
- */
+
 
 @end
