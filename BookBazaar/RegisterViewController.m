@@ -18,6 +18,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [_pwErrorLabel setHidden:YES];
+    [_successLabel setHidden:YES];
+    [_usernameTF setDelegate:self];
+    submitClicked = NO;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,13 +47,14 @@
     else{
          NSLog(@"%@, %@, %@, %@", firstName, lastName, emailAddr, phoneNum);
     }
+    [self insertDBItems];
     
    
 }
 
 -(void)insertDBItems
 {
-    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=INSERT INTO user (username, password, firstName, lastName, emailAddr, phoneNumber, city, state) VALUES (%@, %@, %@, %@, %@, %@, %@, %@)", username, password, firstName, lastName, emailAddr, phoneNum, city, state];
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/postService.php?query=INSERT INTO user (username, password, firstName, lastName, emailAddr, phoneNumber, city, state) VALUES ('%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')", username, password, firstName, lastName, emailAddr, phoneNum, city, @"UT"];
     NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
@@ -60,34 +65,52 @@
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    downloadedData = [[NSMutableData alloc] init];
+
+        downloadedData = [[NSMutableData alloc] init];
+    
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    [downloadedData appendData:data];
+    if(submitClicked)
+    {
+        NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", output);
+        if([output isEqualToString:@"Success!"])
+        {
+            [_successLabel setHidden:NO];
+            _successLabel.text = @"Registration Successful";
+        }
+
+    }
+    else
+    {
+        [downloadedData appendData:data];
+        
+    }
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    // Create an array to store the locations
-    NSString * correctPassword;
+    
     // Parse the JSON that came in
     NSError *error;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:downloadedData options:NSJSONReadingAllowFragments error:&error];
     
     // Loop through Json objects, create question objects and add them to our questions array
-    for (int i = 0; i < jsonArray.count; i++)
+    if(jsonArray.count > 0)
     {
-        NSDictionary *jsonElement = jsonArray[i];
-        
-        correctPassword = jsonElement[@"password"];
         
     }
     
     
     
     // Ready to notify delegate that data is ready and pass back items
+}
+
+- (void)controlTextDidChange:(NSNotification *)notification
+{
+    
 }
 
 /*
@@ -100,4 +123,11 @@
 }
 */
 
+- (IBAction)textDidChange:(id)sender {
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM user WHERE username='%@'", username];
+    NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
+    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
+    [NSURLConnection connectionWithRequest:urlRequest delegate:self];
+}
 @end

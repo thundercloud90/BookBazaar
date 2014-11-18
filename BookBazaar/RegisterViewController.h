@@ -19,6 +19,7 @@
     NSString *city;
     NSString *state;
     NSMutableData *downloadedData;
+    bool submitClicked;
     
 }
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTF;
@@ -32,5 +33,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *rtPasswordTF;
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
 @property (weak, nonatomic) IBOutlet UILabel *pwErrorLabel;
+- (IBAction)textDidChange:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UILabel *successLabel;
 @end

@@ -265,6 +265,9 @@
                                 <rect key="frame" x="311" y="350" width="188" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textDidChange:" destination="LB3-FC-krg" eventType="editingChanged" id="vq8-dN-HlY"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F93-O6-STL">
                                 <rect key="frame" x="460" y="544" width="67" height="36"/>
@@ -299,6 +302,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SuccessLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQQ-4D-f9g">
+                                <rect key="frame" x="279" y="511" width="108" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -312,6 +321,7 @@
                         <outlet property="pwErrorLabel" destination="1cQ-bg-s6M" id="9e9-0q-3EU"/>
                         <outlet property="rtPasswordTF" destination="gJZ-5e-S0G" id="RSc-ro-lgS"/>
                         <outlet property="submitButton" destination="F93-O6-STL" id="ZW2-no-bmd"/>
+                        <outlet property="successLabel" destination="vQQ-4D-f9g" id="PL1-bQ-gdN"/>
                         <outlet property="usernameTF" destination="386-Cn-ABx" id="XwH-RX-LTh"/>
                     </connections>
                 </viewController>
