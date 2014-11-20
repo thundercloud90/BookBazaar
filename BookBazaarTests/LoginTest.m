@@ -1,19 +1,20 @@
 //
-//  BookBazaarTests.m
-//  BookBazaarTests
+//  LoginTest.m
+//  BookBazaar
 //
-//  Created by Wade Wilkey on 9/10/2014.
+//  Created by Wade Wilkey on 18/11/2014.
 //  Copyright (c) 2014 Wade Wilkey. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "LoginViewController.h"
 
-@interface BookBazaarTests : XCTestCase
+@interface LoginTest : XCTestCase
 
 @end
 
-@implementation BookBazaarTests
+@implementation LoginTest
 
 - (void)setUp {
     [super setUp];
@@ -25,9 +26,11 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void)testPasswordValidation {
+    NSString *passwordInserted = @"joejoe";
+    NSString *passwordFromDB = @"joejoe";
+    
+   // XCTAssertEqual(passwordInserted, passwordFromDB)(YES, @"Pass");
 }
 
 - (void)testPerformanceExample {
@@ -36,7 +39,6 @@
         // Put the code you want to measure the time of here.
     }];
 }
-
 
 
 @end
