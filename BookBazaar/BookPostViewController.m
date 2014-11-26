@@ -30,58 +30,47 @@
     bookName = _bookNameTF.text;
     isbnNum = _isbnNumTF.text;
     bookPrice = _bookPriceTF.text;
+    bookCondition = _bookConditionTF.text;
+    [self insertDBItems];
 }
 
 -(void)insertDBItems
 {
-    NSString * query = [NSString stringWithFormat:@""];
+    
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/postService.php?query=INSERT INTO post (userID, ISBN_num, bookName, bookCondition, bookPrice) VALUES ('%@', '%@', '%@', '%@', '%@')", globalUser.userID, isbnNum, bookName, bookCondition, bookPrice];
     NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
     [NSURLConnection connectionWithRequest:urlRequest delegate:self];
+    NSLog(@"%@", stringURL);
 }
+
+#pragma mark NSURLConnectionDataProtocol Methods
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     
-    
+    dbReturnCode = [[NSMutableData alloc] init];
     
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    /*
-    if(submitClicked)
-    {
+   
         NSString *output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"%@", output);
         if([output isEqualToString:@"Success!"])
         {
-            [_successLabel setHidden:NO];
-            _successLabel.text = @"Registration Successful";
+            //[_successLabel setHidden:NO];
+            //_successLabel.text = @"Registration Successful";
         }
         
-    }
-     */
-    
 
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     
-    // Parse the JSON that came in
-    NSError *error;
-    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:dbReturnCode options:NSJSONReadingAllowFragments error:&error];
-    
-    // Loop through Json objects, create question objects and add them to our questions array
-    if(jsonArray.count > 0)
-    {
-        
-    }
-    
-    
-    
-    // Ready to notify delegate that data is ready and pass back items
+
 }
 @end

@@ -20,6 +20,7 @@
     NSString *state;
     NSMutableData *downloadedData;
     bool submitClicked;
+    bool usernameAvailable;
     
 }
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTF;
@@ -32,8 +33,11 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *rtPasswordTF;
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
+@property (weak, nonatomic) IBOutlet UILabel *usernameValidity;
+
 @property (weak, nonatomic) IBOutlet UILabel *pwErrorLabel;
 - (IBAction)textDidChange:(id)sender;
 
+- (IBAction)clickedSubmitButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *successLabel;
 @end

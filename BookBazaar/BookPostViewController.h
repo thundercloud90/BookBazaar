@@ -5,7 +5,7 @@
 //  Created by Wade Wilkey on 18/11/2014.
 //  Copyright (c) 2014 Wade Wilkey. All rights reserved.
 //
-
+#import "ViewController.h"
 #import <UIKit/UIKit.h>
 
 @interface BookPostViewController : UIViewController

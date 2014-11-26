@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    globalUser = [[UserClass alloc] init];
     // Do any additional setup after loading the view, typically from a nib.
 }
 

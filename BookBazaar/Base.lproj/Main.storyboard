@@ -276,7 +276,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="getUserInfo:" destination="LB3-FC-krg" eventType="touchUpInside" id="nJb-gm-175"/>
+                                    <action selector="clickedSubmitButton:" destination="LB3-FC-krg" eventType="touchUpInside" id="ElS-2L-SUh"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password does not match" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cQ-bg-s6M">
@@ -308,6 +308,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Available" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J0r-eD-20O">
+                                <rect key="frame" x="507" y="354" width="93" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.15107909344515638" green="0.70853061868686873" blue="0.095170202246282587" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -323,6 +329,7 @@
                         <outlet property="submitButton" destination="F93-O6-STL" id="ZW2-no-bmd"/>
                         <outlet property="successLabel" destination="vQQ-4D-f9g" id="PL1-bQ-gdN"/>
                         <outlet property="usernameTF" destination="386-Cn-ABx" id="XwH-RX-LTh"/>
+                        <outlet property="usernameValidity" destination="J0r-eD-20O" id="Hfx-vH-X06"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oUw-f5-f3G" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -497,12 +504,16 @@
                                 <color key="textColor" red="0.85606060606060608" green="0.094220716228810591" blue="0.097817363686709596" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MZS-v0-jOU">
+                                <rect key="frame" x="350" y="246" width="240" height="128"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="invalidLoginLabel" destination="fFc-RZ-4R7" id="A9I-z4-7xb"/>
                         <outlet property="pWordTextField" destination="pxk-Nc-ccM" id="jpH-WG-gwv"/>
+                        <outlet property="testImage" destination="MZS-v0-jOU" id="BKc-nQ-RZQ"/>
                         <outlet property="uNameTextField" destination="Nxa-PV-2Ux" id="8St-c9-gHo"/>
                     </connections>
                 </viewController>

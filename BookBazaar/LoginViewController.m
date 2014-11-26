@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [_invalidLoginLabel setHidden:true];
+    collectData = NO;
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -47,13 +48,33 @@
     NSLog([NSString stringWithFormat:@"Entered: %@ Correct: %@", self.pWordTextField.text, correctPassword]);
     if([correctPassword isEqualToString:self.pWordTextField.text])
     {
+        NSString * username = self.uNameTextField.text;
+        NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM user WHERE username='%@'", username];
+        NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
+        NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
+        [NSURLConnection connectionWithRequest:urlRequest delegate:self];
+        
+        NSError *error;
+        NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:downloadedData options:NSJSONReadingAllowFragments error:&error];
+        NSDictionary *jsonElement = jsonArray[0];
+        globalUser.firstName = [[NSString alloc] initWithString:jsonElement[@"firstName"]];
+        globalUser.lastName = jsonElement[@"lastName"];
+        globalUser.emailAddr = jsonElement[@"emailAddr"];
+        globalUser.phoneNumber = jsonElement[@"phoneNumber"];
+        globalUser.city = jsonElement[@"city"];
+        globalUser.state = jsonElement[@"state"];
+        globalUser.userID = jsonElement[@"id"];
+        
         [self.navigationController popViewControllerAnimated:TRUE];
-        NSLog(@"YAY!");
     }
     else
     {
-        NSLog(@"BOO!");
         [_invalidLoginLabel setHidden:false];
+       // NSData* imageData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:@"http://67.182.205.14/cs3450/bookImages/photo2.JPG"]];
+
+//        [self testImage].image = [[UIImage alloc] initWithData:imageData];
+        
     }
 }
 
@@ -81,11 +102,14 @@
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    // Create an array to store the locations
-    NSString * correctPassword;
     // Parse the JSON that came in
     NSError *error;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:downloadedData options:NSJSONReadingAllowFragments error:&error];
+    
+   
+    // Create an array to store the locations
+    NSString * correctPassword;
+
     
     // Loop through Json objects, create question objects and add them to our questions array
     for (int i = 0; i < jsonArray.count; i++)
@@ -97,6 +121,12 @@
     }
     
     [self validatePassword:correctPassword];
+    
+    
+
+
+        
+    
     
     // Ready to notify delegate that data is ready and pass back items
 }

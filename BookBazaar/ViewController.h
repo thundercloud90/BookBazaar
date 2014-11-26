@@ -6,7 +6,11 @@
 //  Copyright (c) 2014 Wade Wilkey. All rights reserved.
 //
 
+
+#import "UserClass.h"
 #import <UIKit/UIKit.h>
+
+UserClass *globalUser;
 
 @interface ViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
