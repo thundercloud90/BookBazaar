@@ -171,6 +171,7 @@
                     <navigationItem key="navigationItem" id="35b-Ra-BxB"/>
                     <connections>
                         <outlet property="loginButton" destination="Ved-Mo-VxJ" id="kAs-23-X82"/>
+                        <outlet property="postBookButton" destination="z11-qE-uB1" id="uoe-N8-e2Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -314,20 +315,76 @@
                                 <color key="textColor" red="0.15107909344515638" green="0.70853061868686873" blue="0.095170202246282587" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Some fields are not filled" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lax-95-fdm">
+                                <rect key="frame" x="226" y="532" width="353" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cc-7f-nIu">
+                                <rect key="frame" x="283" y="96" width="23" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <color key="textColor" red="0.75866082702020199" green="0.067542614223090963" blue="0.045256490663463246" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIO-37-tEv">
+                                <rect key="frame" x="283" y="150" width="23" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <color key="textColor" red="0.75866082700000004" green="0.067542614220000005" blue="0.045256490660000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voj-3J-pT5">
+                                <rect key="frame" x="283" y="196" width="23" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <color key="textColor" red="0.75866082700000004" green="0.067542614220000005" blue="0.045256490660000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rwb-Rl-0fV">
+                                <rect key="frame" x="283" y="242" width="23" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <color key="textColor" red="0.75866082700000004" green="0.067542614220000005" blue="0.045256490660000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8p2-65-11X">
+                                <rect key="frame" x="283" y="278" width="23" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <color key="textColor" red="0.75866082700000004" green="0.067542614220000005" blue="0.045256490660000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICu-56-Fxs">
+                                <rect key="frame" x="283" y="350" width="23" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <color key="textColor" red="0.75866082700000004" green="0.067542614220000005" blue="0.045256490660000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJP-xo-a9C">
+                                <rect key="frame" x="283" y="395" width="23" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <color key="textColor" red="0.75866082700000004" green="0.067542614220000005" blue="0.045256490660000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="cityErrorLabel" destination="8p2-65-11X" id="Sk1-uU-CvJ"/>
                         <outlet property="cityTF" destination="QDb-O6-o94" id="lHz-1d-oJi"/>
+                        <outlet property="eaErrorLabel" destination="voj-3J-pT5" id="MMb-hd-6Sh"/>
                         <outlet property="emailAddrTF" destination="pVB-Aq-g7x" id="Vox-sL-AOl"/>
                         <outlet property="firstNameTF" destination="mxt-QO-kua" id="pDU-7m-9YQ"/>
+                        <outlet property="fnErrorLabel" destination="4cc-7f-nIu" id="0bq-lf-eoo"/>
                         <outlet property="lastNameTF" destination="syS-Pq-k8j" id="YLs-Bc-ZT0"/>
+                        <outlet property="lnErrorLabel" destination="gIO-37-tEv" id="r8l-JQ-gv1"/>
+                        <outlet property="nullFieldLabel" destination="Lax-95-fdm" id="5Sl-6N-sky"/>
+                        <outlet property="nullPWErrorLabel" destination="RJP-xo-a9C" id="esN-UB-iR0"/>
                         <outlet property="passwordTF" destination="igZ-jo-q21" id="5Ar-sD-hOd"/>
                         <outlet property="phoneNumTF" destination="GmI-AI-dxR" id="dTx-LH-yyY"/>
+                        <outlet property="pnErrorLabel" destination="Rwb-Rl-0fV" id="9pQ-hd-cEg"/>
                         <outlet property="pwErrorLabel" destination="1cQ-bg-s6M" id="9e9-0q-3EU"/>
                         <outlet property="rtPasswordTF" destination="gJZ-5e-S0G" id="RSc-ro-lgS"/>
                         <outlet property="submitButton" destination="F93-O6-STL" id="ZW2-no-bmd"/>
                         <outlet property="successLabel" destination="vQQ-4D-f9g" id="PL1-bQ-gdN"/>
+                        <outlet property="unErrorLabel" destination="ICu-56-Fxs" id="ntm-jx-XaC"/>
                         <outlet property="usernameTF" destination="386-Cn-ABx" id="XwH-RX-LTh"/>
                         <outlet property="usernameValidity" destination="J0r-eD-20O" id="Hfx-vH-X06"/>
                     </connections>

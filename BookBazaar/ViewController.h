@@ -11,9 +11,12 @@
 #import <UIKit/UIKit.h>
 
 UserClass *globalUser;
+bool isLoggedIn;
 
 @interface ViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIButton *postBookButton;
 
 
 

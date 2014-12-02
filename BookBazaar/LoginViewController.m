@@ -29,6 +29,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)submitButton:(id)sender {
     NSString *username = self.uNameTextField.text;
     NSString *password = self.pWordTextField.text;
@@ -57,15 +58,17 @@
         
         NSError *error;
         NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:downloadedData options:NSJSONReadingAllowFragments error:&error];
-        NSDictionary *jsonElement = jsonArray[0];
-        globalUser.firstName = [[NSString alloc] initWithString:jsonElement[@"firstName"]];
-        globalUser.lastName = jsonElement[@"lastName"];
-        globalUser.emailAddr = jsonElement[@"emailAddr"];
-        globalUser.phoneNumber = jsonElement[@"phoneNumber"];
-        globalUser.city = jsonElement[@"city"];
-        globalUser.state = jsonElement[@"state"];
-        globalUser.userID = jsonElement[@"id"];
+        NSDictionary *jsonElement2 = jsonArray[0];
+
+        globalUser.firstName = [[NSString alloc] initWithString:jsonElement2[@"firstName"]];
+        globalUser.lastName = jsonElement2[@"lastName"];
+        globalUser.emailAddr = jsonElement2[@"emailAddr"];
+        globalUser.phoneNumber = jsonElement2[@"phoneNumber"];
+        globalUser.city = jsonElement2[@"city"];
+        globalUser.state = jsonElement2[@"state"];
+        globalUser.userID = jsonElement2[@"id"];
         
+        isLoggedIn = YES;
         [self.navigationController popViewControllerAnimated:TRUE];
     }
     else
@@ -81,7 +84,7 @@
 -(void)downloadItems
 {
     NSString * username = self.uNameTextField.text;
-    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT password FROM user WHERE username='%@'", username];
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM user WHERE username='%@'", username];
     NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];

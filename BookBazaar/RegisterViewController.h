@@ -21,6 +21,7 @@
     NSMutableData *downloadedData;
     bool submitClicked;
     bool usernameAvailable;
+    bool nullField;
     
 }
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTF;
@@ -40,4 +41,14 @@
 
 - (IBAction)clickedSubmitButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *successLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nullFieldLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fnErrorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lnErrorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *eaErrorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pnErrorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cityErrorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *unErrorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nullPWErrorLabel;
+
+
 @end

@@ -19,10 +19,19 @@
     // Do any additional setup after loading the view.
     [_pwErrorLabel setHidden:YES];
     [_successLabel setHidden:YES];
+    [_fnErrorLabel setHidden:YES];
+    [_lnErrorLabel setHidden:YES];
+    [_eaErrorLabel setHidden:YES];
+    [_pnErrorLabel setHidden:YES];
+    [_cityErrorLabel setHidden:YES];
+    [_unErrorLabel setHidden:YES];
+    [_nullPWErrorLabel setHidden:YES];
     [_usernameTF setDelegate:self];
     submitClicked = NO;
     usernameAvailable = NO;
+    nullField = YES;
     [_usernameValidity setHidden:YES];
+    [_nullFieldLabel setHidden:YES];
     
 }
 
@@ -132,14 +141,98 @@
     //We now need to check for null fields and guard against empty inserts.
     //TODO -- 
     firstName = _firstNameTF.text;
+    if([firstName isEqualToString:@""])
+    {
+        [_fnErrorLabel setHidden:NO];
+        nullField = YES;
+    }
+    else
+    {
+        [_fnErrorLabel setHidden:YES];
+        nullField = NO;
+    }
+    
     lastName = _lastNameTF.text;
+    if([lastName isEqualToString:@""])
+    {
+        [_lnErrorLabel setHidden:NO];
+        nullField = YES;
+    }
+    else
+    {
+        [_lnErrorLabel setHidden:YES];
+        nullField = NO;
+    }
+    
     emailAddr = _emailAddrTF.text;
+    if([emailAddr isEqualToString:@""])
+    {
+        [_eaErrorLabel setHidden:NO];
+        nullField = YES;
+    }
+    else
+    {
+        [_eaErrorLabel setHidden:YES];
+        nullField = NO;
+    }
+    
     phoneNum = _phoneNumTF.text;
+    if([phoneNum isEqualToString:@""])
+    {
+        [_pnErrorLabel setHidden:NO];
+        nullField = YES;
+    }
+    else
+    {
+        [_pnErrorLabel setHidden:YES];
+        nullField = NO;
+    }
+    
     city = _cityTF.text;
+    if([city isEqualToString:@""])
+    {
+        [_cityErrorLabel setHidden:NO];
+        nullField = YES;
+    }
+    else
+    {
+        [_cityErrorLabel setHidden:YES];
+        nullField = NO;
+    }
+    
     state = @"UT";
+    
     username = _usernameTF.text;
+    if([username isEqualToString:@""])
+    {
+        [_unErrorLabel setHidden:NO];
+        nullField = YES;
+    }
+    else
+    {
+        [_unErrorLabel setHidden:YES];
+        nullField = NO;
+    }
+    
     password = _passwordTF.text;
+    if([password isEqualToString:@""])
+    {
+        [_nullPWErrorLabel setHidden:NO];
+        nullField = YES;
+    }
+    else
+    {
+        [_nullPWErrorLabel setHidden:YES];
+        nullField = NO;
+    }
+    
+    if(nullField)
+    {
+        [_nullFieldLabel setHidden:NO];
+    }
+    
     NSString* passwordCheck = _rtPasswordTF.text;
+    
     if(![password isEqualToString:passwordCheck])
     {
         [_pwErrorLabel setHidden:NO];
@@ -149,7 +242,7 @@
         _successLabel.text = @"Username Unavailable. Retry";
         [_successLabel setHidden:NO];
     }
-    else{
+    else if(!nullField){
         NSLog(@"%@, %@, %@, %@", firstName, lastName, emailAddr, phoneNum);
          submitClicked = YES;
         [self insertDBItems];

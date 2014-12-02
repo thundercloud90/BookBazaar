@@ -18,7 +18,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     globalUser = [[UserClass alloc] init];
+
+    [_postBookButton setHidden:YES];
+    
+
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    if(isLoggedIn)
+    {
+        [_postBookButton setHidden:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
