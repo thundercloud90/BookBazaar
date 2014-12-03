@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [_successLabel setHidden:YES];
     // Do any additional setup after loading the view.
 }
 
@@ -61,8 +62,8 @@
         NSLog(@"%@", output);
         if([output isEqualToString:@"Success!"])
         {
-            //[_successLabel setHidden:NO];
-            //_successLabel.text = @"Registration Successful";
+            [_successLabel setHidden:NO];
+            _successLabel.text = @"Registration Successful";
         }
         
 

@@ -21,5 +21,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *bookPriceTF;
 - (IBAction)submitButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *bookConditionTF;
+@property (weak, nonatomic) IBOutlet UILabel *successLabel;
 
 @end

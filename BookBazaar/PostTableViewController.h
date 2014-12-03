@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "UserClass.h"
+#import "Post.h"
 #import "PostDetailsViewController.h"
 
 @interface PostTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, NSURLConnectionDelegate>
 {
     NSMutableData *_downloadedData;
-    NSMutableArray *userInfo;
+    NSMutableArray *postInfo;
     
 }
 

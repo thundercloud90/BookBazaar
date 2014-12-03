@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegisterViewController : UIViewController <NSURLConnectionDelegate>
+@interface RegisterViewController : UIViewController <NSURLConnectionDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 {
     NSString* firstName;
     NSString* lastName;
@@ -22,6 +22,9 @@
     bool submitClicked;
     bool usernameAvailable;
     bool nullField;
+    NSArray *stateArr;
+    UIPickerView *picker;
+    UITextField *stateField;
     
 }
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTF;
@@ -49,6 +52,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *cityErrorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *unErrorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nullPWErrorLabel;
+
+@property (weak, nonatomic) IBOutlet UIPickerView *statePicker;
+
+-(IBAction)textFieldReturn:(id)sender;
 
 
 @end

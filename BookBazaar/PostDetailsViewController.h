@@ -8,13 +8,26 @@
 
 #import <UIKit/UIKit.h>
 #import "UserClass.h"
+#import "Post.h"
 
 @interface PostDetailsViewController : UIViewController
 {
-    UserClass *user;
+    Post *newPost;
+    NSMutableData *downloadedData;
 }
 @property (weak, nonatomic) IBOutlet UILabel *booknameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *authorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *cityLabel;
-@property (nonatomic) UserClass *userObject;
+@property (weak, nonatomic) IBOutlet UILabel *isbnLabel;
+@property (weak, nonatomic) IBOutlet UILabel *conditionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
+
+
+@property (nonatomic) Post *postObject;
+
+
 
 @end

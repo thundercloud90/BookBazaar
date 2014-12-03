@@ -33,6 +33,13 @@
     [_usernameValidity setHidden:YES];
     [_nullFieldLabel setHidden:YES];
     
+
+    stateArr = @[@"AK", @"AL", @"AR", @"AZ", @"CA", @"CO", @"CT", @"DE", @"FL", @"GA", @"HI", @"IA", @"ID", @"IL", @"IN", @"KS", @"KY", @"LA", @"MA", @"MD", @"ME", @"MI", @"MN", @"MO", @"MS", @"MT", @"NC", @"ND", @"NE", @"NH", @"NJ", @"NM", @"NV", @"NY", @"OH", @"OK", @"OR", @"PA", @"RI", @"SC", @"SD", @"TN", @"TX", @"UT", @"VA", @"VT", @"WA", @"WI", @"WV", @"WY"];
+    
+    self.statePicker.dataSource = self;
+    self.statePicker.delegate = self;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -200,7 +207,7 @@
         nullField = NO;
     }
     
-    state = @"UT";
+  
     
     username = _usernameTF.text;
     if([username isEqualToString:@""])
@@ -249,6 +256,35 @@
        
     }
     
+}
+
+
+// The number of columns of data
+- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// The number of rows of data
+- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return stateArr.count;
+}
+
+// The data to return for the row and component (column) that's being passed in
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return stateArr[row];
+}
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    state = [stateArr objectAtIndex:row];
+}
+
+-(IBAction)textFieldReturn:(id)sender
+{
+    [sender resignFirstResponder];
 }
 
 /*

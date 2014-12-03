@@ -34,7 +34,7 @@
     NSString *username = self.uNameTextField.text;
     NSString *password = self.pWordTextField.text;
     NSLog(@"Here!: %@, %@", username, password);
-    [self downloadItems];
+    [self downloadItems:username];
     
 }
 
@@ -54,7 +54,8 @@
         NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
         NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
-        [NSURLConnection connectionWithRequest:urlRequest delegate:self];
+        //[NSURLConnection connectionWithRequest:urlRequest delegate:self];
+        _conn = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
         
         NSError *error;
         NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:downloadedData options:NSJSONReadingAllowFragments error:&error];
@@ -69,6 +70,7 @@
         globalUser.userID = jsonElement2[@"id"];
         
         isLoggedIn = YES;
+        [self.conn cancel];
         [self.navigationController popViewControllerAnimated:TRUE];
     }
     else
@@ -81,9 +83,9 @@
     }
 }
 
--(void)downloadItems
+-(void)downloadItems:(NSString*) username
 {
-    NSString * username = self.uNameTextField.text;
+    //NSString * username = self.uNameTextField.text;
     NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM user WHERE username='%@'", username];
     NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
@@ -124,12 +126,6 @@
     }
     
     [self validatePassword:correctPassword];
-    
-    
-
-
-        
-    
     
     // Ready to notify delegate that data is ready and pass back items
 }

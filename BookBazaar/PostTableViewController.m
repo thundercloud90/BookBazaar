@@ -24,7 +24,7 @@
     self.listTableView.dataSource = self;
     
     listItems = [[NSArray alloc] init];
-    userInfo = [[NSMutableArray alloc] init];
+    postInfo = [[NSMutableArray alloc] init];
     [self downloadItems];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -55,7 +55,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return userInfo.count;
+    return postInfo.count;
 }
 
 
@@ -66,10 +66,10 @@
     NSString *cellIdentifier = @"BasicCell";
     UITableViewCell *myCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     // Get the location to be shown
-    UserClass *user = userInfo[indexPath.row];
+    Post *post = postInfo[indexPath.row];
     
     // Get references to labels of cell
-    myCell.textLabel.text = [user firstName];
+    myCell.textLabel.text = [post bookName];
     
     return myCell;
     
@@ -79,7 +79,7 @@
 - (void)downloadItems
 {
     // Download the json file
-    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM user"];
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM post"];
     NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
@@ -115,7 +115,7 @@
     for (int i = 0; i < jsonArray.count; i++)
     {
         NSDictionary *jsonElement = jsonArray[i];
-        
+        /*
         UserClass *user = [[UserClass alloc] init];
         user.firstName = jsonElement[@"firstName"];
         user.lastName = jsonElement[@"lastName"];
@@ -124,8 +124,20 @@
         user.phoneNumber = jsonElement[@"phoneNumber"];
         user.city = jsonElement[@"city"];
         user.state = jsonElement[@"state"];
+         */
         
-        [userInfo addObject:user];
+        Post *newPost = [[Post alloc] init];
+        newPost.bookName = jsonElement[@"bookName"];
+        newPost.authorName = jsonElement[@"bookAuthor"];
+        newPost.postID = jsonElement[@"postID"];
+        newPost.isbnNum = jsonElement[@"ISBN_num"];
+        newPost.bookCondition = jsonElement[@"bookCondition"];
+        newPost.timestamp = jsonElement[@"timestamp"];
+        newPost.price = jsonElement[@"bookPrice"];
+        newPost.imagePath = jsonElement[@"imagePath"];
+        newPost.userID = jsonElement[@"userID"];
+        
+        [postInfo addObject:newPost];
     }
     
     // Reload the table view
@@ -181,8 +193,8 @@
          PostDetailsViewController *vc;
          vc = [segue destinationViewController];
         
-         UserClass *userObj = userInfo[path.row];
-         vc.userObject = userObj;
+         Post *postObj = postInfo[path.row];
+         vc.postObject = postObj;
      }
 
      else{

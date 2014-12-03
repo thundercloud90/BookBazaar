@@ -26,11 +26,14 @@
     [super tearDown];
 }
 
-- (void)testPasswordValidation {
-    NSString *passwordInserted = @"joejoe";
-    NSString *passwordFromDB = @"joejoe";
+- (void)testLogin {
+    NSString *username = @"papajoe";
+    NSString *password = @"joejoe";
+    LoginViewController *lvc;
+    [lvc downloadItems:username];
     
-   // XCTAssertEqual(passwordInserted, passwordFromDB)(YES, @"Pass");
+    
+
 }
 
 - (void)testPerformanceExample {
