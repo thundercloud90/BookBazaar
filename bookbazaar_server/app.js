@@ -14,7 +14,7 @@ var logger = require('morgan');
 var mysql = require('mysql');
 var dbConnection = mysql.createConnection({
                   host     : 'localhost',
-                  database : 'bookBazaar',
+                  database : 'mydb',
                   user     : 'root',
                   password : ''
                 });
@@ -58,9 +58,9 @@ app.use(session({
         host:'127.0.0.1',
         port:6380,
         prefix:'sess'
-    }),
-    cookie: { } 
-    secret: 'B00kb@3aAR' }));
+    }), 
+    secret: 'B00kb@3aAR' 
+  }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 

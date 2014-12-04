@@ -2,7 +2,8 @@
 				
 // load all the things we need
 var LocalStrategy = require('passport-local').Strategy;
-var dbConnection = require('./app').dbConnection;	
+var mysql = require('mysql');
+var dbConnection = require('./app').dbConnection;
  
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -18,7 +19,7 @@ module.exports = function(passport) {
 		done(null, user.id);
     });
  
-    // used to deserialize the user
+    // used to deserialize the user from the session
     passport.deserializeUser(function (id, done) {
 		User.findById(id, function (err, user) {
             done(err, user);
@@ -35,17 +36,18 @@ module.exports = function(passport) {
     passport.use('local-signup', new LocalStrategy({
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
-    function(req, email, password, done) {
+    function (req, email, password, done) {
  
 		// find a user whose email is the same as the forms email
 		// we are checking to see if the user trying to login already exists
-        dbConnection.query("select * from users where email = '"+email+"'",function(err,rows){
+        var sql = "SELECT * FROM Login WHERE UserName = "+dbConnection.escape(email);
+        dbConnection.query(sql, function (err, rows){
 			console.log(rows);
 			console.log("above row object");
 			if (err)
                 return done(err);
-			 if (rows.length) {
-                return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+			if (rows.length) {
+                return done(null, false, req.flash('signupMessage', 'That email address is already taken.'));
             } else {
  
 				// if there is no user with that email
@@ -53,14 +55,18 @@ module.exports = function(passport) {
                 var newUserMysql = new Object();
 				
 				newUserMysql.email    = email;
-                newUserMysql.password = password; // use the generateHash function in our user model
+                newUserMysql.password = password; 
+                newUserMysql.phonenumber = req.body.phonenumber;
 			
-				var insertQuery = "INSERT INTO users ( email, password ) values ('" + email +"','"+ password +"')";
-					console.log(insertQuery);
+				var insertQuery = "INSERT INTO Login ( UserName, Password, User_PhoneNum ) VALUES (?, ?, ?)";
+                var inserts = [email, password, req.body.phonenumber];
+                insertQuery = mysql.format(insertQuery, inserts);
+
+				console.log(insertQuery);
 				dbConnection.query(insertQuery,function(err,rows){
-				newUserMysql.id = rows.insertId;
-				
-				return done(null, newUserMysql);
+				    if(err)
+                        return done(err);
+				    return done(null, newUserMysql);
 				});	
             }	
 		});
@@ -75,9 +81,10 @@ module.exports = function(passport) {
     passport.use('local-login', new LocalStrategy({
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
-    function(req, email, password, done) { // callback with email and password from our form
+    function (req, email, password, done) { // callback with email and password from our form
  
-         dbConnection.query("SELECT * FROM `users` WHERE `email` = '" + email + "'",function(err,rows){
+        var sql = "SELECT * FROM Login WHERE UserName = " + dbConnection.escape(email);
+        dbConnection.query(sql, function (err,rows){
 			if (err)
                 return done(err);
 			 if (!rows.length) {
