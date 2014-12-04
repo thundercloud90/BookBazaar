@@ -32,6 +32,7 @@
     _isbnLabel.text = _postObject.isbnNum;
     _conditionLabel.text = _postObject.bookCondition;
     _priceLabel.text = _postObject.price;
+    [_activityIndic startAnimating];
     [self downloadItems];
 }
 
@@ -68,11 +69,16 @@
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:downloadedData options:NSJSONReadingAllowFragments error:&error];
     NSDictionary *jsonElement = jsonArray[0];
     
-
     _usernameLabel.text = jsonElement[@"username"];
     _cityLabel.text = jsonElement[@"city"];
     _phoneLabel.text = jsonElement[@"phoneNumber"];
+    _emailLabel.text = jsonElement[@"emailAddr"];
     
+    
+    NSData* imageData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:@"http://67.182.205.14/cs3450/bookImages/photo2.JPG"]];
+    
+    [self bookImage].image = [[UIImage alloc] initWithData:imageData];
+    [_activityIndic stopAnimating];
 }
 
 

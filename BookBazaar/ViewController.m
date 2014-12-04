@@ -20,6 +20,7 @@
     globalUser = [[UserClass alloc] init];
 
     [_postBookButton setHidden:YES];
+    [_managePostButton setHidden:YES];
     
 
     // Do any additional setup after loading the view, typically from a nib.
@@ -30,6 +31,11 @@
     if(isLoggedIn)
     {
         [_postBookButton setHidden:NO];
+    }
+    
+    if(isAdmin)
+    {
+        [_managePostButton setHidden:NO];
     }
 }
 

@@ -22,4 +22,5 @@
 @property (nonatomic, strong) NSString *imagePath;
 @property (nonatomic, strong) NSString *userID;
 
+
 @end

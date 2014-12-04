@@ -20,7 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *testImage;
 
-@property (weak) NSURLConnection *conn;
+@property (strong) NSURLConnection *conn;
 
 -(void)downloadItems:(NSString*)username;
 
