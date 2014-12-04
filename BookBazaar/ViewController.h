@@ -12,11 +12,13 @@
 
 UserClass *globalUser;
 bool isLoggedIn;
+bool isAdmin;
 
 @interface ViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *postBookButton;
+@property (weak, nonatomic) IBOutlet UIButton *managePostButton;
 
 
 

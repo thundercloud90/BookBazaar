@@ -11,6 +11,7 @@
 		FC14D38A1A1C3D1D00F45993 /* LoginTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC14D3891A1C3D1D00F45993 /* LoginTest.m */; };
 		FC14D38D1A1C3EE700F45993 /* BookPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC14D38C1A1C3EE700F45993 /* BookPostViewController.m */; };
 		FC283AEA1A2E3F0200788936 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = FC283AE91A2E3F0200788936 /* Post.m */; };
+		FC283AED1A2EF2C900788936 /* ManagePostsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC283AEC1A2EF2C900788936 /* ManagePostsTableView.m */; };
 		FC32D50A19F973D1006240EB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32D50919F973D1006240EB /* LoginViewController.m */; };
 		FCAC757919E70B8500AA6AE7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAC757819E70B8500AA6AE7 /* main.m */; };
 		FCAC757C19E70B8500AA6AE7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAC757B19E70B8500AA6AE7 /* AppDelegate.m */; };
@@ -42,6 +43,8 @@
 		FC14D38C1A1C3EE700F45993 /* BookPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookPostViewController.m; sourceTree = "<group>"; };
 		FC283AE81A2E3F0200788936 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		FC283AE91A2E3F0200788936 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		FC283AEB1A2EF2C900788936 /* ManagePostsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagePostsTableView.h; sourceTree = "<group>"; };
+		FC283AEC1A2EF2C900788936 /* ManagePostsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagePostsTableView.m; sourceTree = "<group>"; };
 		FC32D50919F973D1006240EB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		FC32D50B19F9740E006240EB /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		FCAC757319E70B8500AA6AE7 /* BookBazaar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookBazaar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +121,8 @@
 				FCCE934F1A0F0CB800B9F56F /* PostTableViewController.m */,
 				FC14D3861A19953000F45993 /* PostDetailsViewController.h */,
 				FC14D3871A19953000F45993 /* PostDetailsViewController.m */,
+				FC283AEB1A2EF2C900788936 /* ManagePostsTableView.h */,
+				FC283AEC1A2EF2C900788936 /* ManagePostsTableView.m */,
 				FCAC758019E70B8500AA6AE7 /* Main.storyboard */,
 				FCCE93511A10435000B9F56F /* UserClass.h */,
 				FCCE93521A10435000B9F56F /* UserClass.m */,
@@ -262,6 +267,7 @@
 				FC32D50A19F973D1006240EB /* LoginViewController.m in Sources */,
 				FC14D38D1A1C3EE700F45993 /* BookPostViewController.m in Sources */,
 				FCCE93501A0F0CB800B9F56F /* PostTableViewController.m in Sources */,
+				FC283AED1A2EF2C900788936 /* ManagePostsTableView.m in Sources */,
 				FC283AEA1A2E3F0200788936 /* Post.m in Sources */,
 				FCCE934A1A0E984A00B9F56F /* RegisterViewController.m in Sources */,
 				FCAC757F19E70B8500AA6AE7 /* ViewController.m in Sources */,

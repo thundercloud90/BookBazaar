@@ -44,7 +44,7 @@
 
 }
 
--(void)validatePassword:(NSString *)correctPassword
+-(void)validatePassword:(NSString *)correctPassword checkRights:(NSString *)adminCode
 {
     NSLog([NSString stringWithFormat:@"Entered: %@ Correct: %@", self.pWordTextField.text, correctPassword]);
     if([correctPassword isEqualToString:self.pWordTextField.text])
@@ -69,16 +69,23 @@
         globalUser.state = jsonElement2[@"state"];
         globalUser.userID = jsonElement2[@"id"];
         
+        if([adminCode  isEqual: @"1"])
+        {
+            isAdmin = YES;
+        }
         isLoggedIn = YES;
         [self.conn cancel];
         [self.navigationController popViewControllerAnimated:TRUE];
     }
     else
     {
-        [_invalidLoginLabel setHidden:false];
-       // NSData* imageData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:@"http://67.182.205.14/cs3450/bookImages/photo2.JPG"]];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                  message:@"Invalid Password"
+                                                  delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alert show];
 
-//        [self testImage].image = [[UIImage alloc] initWithData:imageData];
         
     }
 }
@@ -113,7 +120,8 @@
     
    
     // Create an array to store the locations
-    NSString * correctPassword;
+    NSString *correctPassword;
+    NSString *adminCode;
 
     
     // Loop through Json objects, create question objects and add them to our questions array
@@ -122,10 +130,11 @@
         NSDictionary *jsonElement = jsonArray[i];
         
         correctPassword = jsonElement[@"password"];
+        adminCode = jsonElement[@"isAdmin"];
      
     }
     
-    [self validatePassword:correctPassword];
+    [self validatePassword:correctPassword checkRights:adminCode];
     
     // Ready to notify delegate that data is ready and pass back items
 }

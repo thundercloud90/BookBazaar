@@ -62,8 +62,15 @@
         NSLog(@"%@", output);
         if([output isEqualToString:@"Success!"])
         {
-            [_successLabel setHidden:NO];
-            _successLabel.text = @"Registration Successful";
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Book Bazaar"
+                                                            message:@"Posted Successfully"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil
+                                  ,nil];
+            [alert show];
+            //[_successLabel setHidden:NO];
+            //_successLabel.text = @"Registration Successful";
         }
         
 
