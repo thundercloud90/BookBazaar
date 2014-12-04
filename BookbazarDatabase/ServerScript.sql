@@ -13,8 +13,8 @@ AND Baned = 0
 --Viewlistings
 SELECT bookname, filename, Author, FileName, Condition, Edition, TimePosted
 FROM Book
-JOIN Postings on Book.Isbn = Posting.Books_ISBN
-Where User_PhoneNum = @Phonenumber
+JOIN Postings ON Book.Isbn = Posting.Books_ISBN
+WHERE User_PhoneNum = @Phonenumber
 
 
 --create procedure dbo.Postlisting (@Book_ISBN, @Phonenumber, @TimeNow)
@@ -39,7 +39,7 @@ WHERE Book_ISBN=@Book_ISBN
 --Check if user is admin
 SELECT IsAdmin
 FROM User
-Where Phonenum = @PhoneNumber
+WHERE Phonenum = @PhoneNumber
 
 --create procedure dbo.ReportAbuse(@Report, @PhoneNumber)
 --AS
@@ -53,14 +53,14 @@ value (@Report, @PhoneNumber)
 --View abuse that has been posted
 SELECT AbuserNumber, User_PhoneNum, Report
 FROM Abuse
-Where Solved = False
+WHERE Solved = False
 
 --create procedure dbo.SolveAbuse (@AbuserNumber)
 --as
 --put that abuse has been resolved
-Insert Into Abuse (Solved)
-value (True)
-Where ABuse.AbuserNumber = @AbuserNumber
+UPDATE Abuse 
+SET Solved = True
+WHERE ABuse.AbuserNumber = @AbuserNumber
 
 
 
@@ -69,14 +69,14 @@ Where ABuse.AbuserNumber = @AbuserNumber
 --search listings
 SELECT DISTINCT bookname, Author, FileName, Condition, Edition, TimePosted
 FROM Book
-JOIN Postings on Book.Isbn = Posting.Books_ISBN
-Where Isbn = @Input or Bookname = @Input or Author= @Input or Condition= @Input or Edition= @Input
+JOIN Postings ON Book.Isbn = Posting.Books_ISBN
+WHERE Isbn = @Input OR Bookname = @Input OR Author = @Input OR Condition = @Input OR Edition = @Input
 
 --create procedure dbo.banAccount (@Phonenumber varchar(10))
 --AS
 --ban someones account
-INSERT INTO Login (Baned)
-VALUES (True)
+UPDATE Login 
+SET Baned = True
 WHERE User_PhoneNum = @phonenumber
 
 
