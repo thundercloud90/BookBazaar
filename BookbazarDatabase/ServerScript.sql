@@ -1,10 +1,10 @@
 ﻿--create procedure LoginingIn 
---@UserName varchar(30)
+--@UsersName varchar(30)
 --@Password varchar(10)
 --AS
 --LoginingIn 
 SELECT User_PhoneNum FROM Login 
-WHERE UserName = @UserName  
+WHERE UsersName = @UsersName  
 AND Password = @Password
 AND Baned = 0
 
@@ -36,12 +36,12 @@ VALUES (@Isbn, @Bookname, @filename, @Author, @FileName, @Condition, @Edition)
 DELETE FROM dbo.Postings
 WHERE Book_ISBN=@Book_ISBN
 
---Check if user is admin
+--Check if Users is admin
 SELECT IsAdmin
-FROM User
+FROM Users
 WHERE Phonenum = @PhoneNumber
 
---create procedure dbo.ReportAbuse(@Report, @PhoneNumber)
+--create procedure dbo.ReportAbuse(i should @Report, @PhoneNumber)
 --AS
 --report abuse
 INSERT INTO Abuse (Report, PhoneNumber)
@@ -51,16 +51,16 @@ value (@Report, @PhoneNumber)
 --create procedure dbo.ViewAbuse()
 --AS
 --View abuse that has been posted
-SELECT AbuserNumber, User_PhoneNum, Report
+SELECT AbUsersNumber, User_PhoneNum, Report
 FROM Abuse
 WHERE Solved = False
 
---create procedure dbo.SolveAbuse (@AbuserNumber)
+--create procedure dbo.SolveAbuse (@AbUsersNumber)
 --as
 --put that abuse has been resolved
 UPDATE Abuse 
 SET Solved = True
-WHERE ABuse.AbuserNumber = @AbuserNumber
+WHERE ABuse.AbUsersNumber = @AbUsersNumber
 
 
 
