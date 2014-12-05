@@ -3,8 +3,10 @@
 --@Password varchar(10)
 --AS
 --LoginingIn 
-SELECT User_PhoneNum FROM Login 
-WHERE UsersName = @UsersName  
+SELECT User_PhoneNum, FirstName, LastName, Street, City, State, ZipCode, IsAdmin, AvatarFilename 
+FROM Login 
+JOIN Users ON Login.User_PhoneNum = Users.Phonenum
+WHERE UsersName = @UsersName 
 AND Password = @Password
 AND Baned = 0
 
@@ -34,7 +36,7 @@ VALUES (@Isbn, @Bookname, @filename, @Author, @FileName, @Condition, @Edition)
 --AS
 --delete a listing
 DELETE FROM dbo.Postings
-WHERE Book_ISBN=@Book_ISBN
+WHERE Book_ISBN=@Book_ISBN AND PhoneNumber=@PhoneNumber
 
 --Check if Users is admin
 SELECT IsAdmin
@@ -87,3 +89,13 @@ FROM Book
 JOIN Postings ON Book.Isbn = Posting.Books_ISBN
 ORDER BY TimePosted DESC
 
+--Users data pull
+SELECT PhoneNum, FirstName, LastName, Street, City, State, ZipCode, IsAdmin, AvatarFilename 
+FROM Users 
+WHERE Password = @Password
+
+--Create User
+INSERT INTO Users (PhoneNum, FirstName, LastName, Street, City, State, ZipCode, IsAdmin, AvatarFilename)
+value (@PhoneNum, @FirstName, @LastName, @Street, @City, @State, @ZipCode, @IsAdmin, @AvatarFilename)
+INSERT INTO Login (UsersName, Password, User_PhoneNum)
+value (@UsersName, @Password, @PhoneNum)
