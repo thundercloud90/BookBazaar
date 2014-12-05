@@ -1,6 +1,5 @@
 // REST APIs for the abuse report CRUD operations
-
-var passport = require('./app').passport;
+;
 var express = require('express');
 var router = express.Router();
 

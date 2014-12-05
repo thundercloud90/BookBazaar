@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    
+  </head>
+
+ <nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="Books.html">BookBazzar</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="Books.html">Browse <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="Post.html">Post Book</a></li>        
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">GO</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="Login.html">Account</a></li>
+        <li><a href="Register.html">Register</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+ <div class="container">
+
+      <form class="form-signin" role="form">
+        <h2 class="form-signin-heading">Books Posting</h2>
+
+        <label for="inputTitle">Title</label>
+        <input type = "text" id = "inputTitle" placeholder = "Title" required autofocus>
+
+        <label for="inputISBN">ISBN</label>
+        <input type="number" id="inputISBN" placeholder="ISBN" required>
+
+        <label for="inputAuthor">Author</label>
+        <input type = "text" id = "inputAuthor" placeholder = "Author" required>
+
+        <label for="inputEdition">Edition</label>
+        <input type = "text" id = "inputEdition" placeholder = "Edition" required>
+
+        <label for="inputCondition">Condition</label>
+        <input type = "text" id = "inputCondition" placeholder = "Condition" required>
+
+        <label for="inputSchool">School information</label>
+        <input type = "text" id = "inputSchool" placeholder = "School information">
+
+        <button class="btn btn-lg" type="submit">Post</button>
+      </form>
+
+    </div> <!-- /container -->
+
+ 
+</html>
