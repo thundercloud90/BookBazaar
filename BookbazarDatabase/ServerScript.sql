@@ -20,8 +20,8 @@ WHERE User_PhoneNum = @Phonenumber
 --create procedure dbo.Postlisting (@Book_ISBN, @Phonenumber, @TimeNow)
 --AS
 --Postlisting
-INSERT INTO Posting (Book_ISBN, Phonenumber, TimeNow)
-VALUES (@Book_ISBN, @Phonenumber, @TimeNow)
+INSERT INTO Posting (Book_ISBN, Phonenumber, TimeNow, Price)
+VALUES (@Book_ISBN, @Phonenumber, @TimeNow ,@Price)
 
 --create procedure dbo.newBook (@Isbn, @Bookname, @filename, @Author, @FileName, @`Condition`, @`Edition`)
 --AS
@@ -67,10 +67,12 @@ WHERE ABuse.AbUsersNumber = @AbUsersNumber
 --create procedure dbo.Search (@Input)
 --AS
 --search listings
-SELECT DISTINCT bookname, Author, FileName, Condition, Edition, TimePosted
+SELECT DISTINCT bookname, Author, FileName, Condition, Edition, TimePosted, Posting.User_PhoneNum, Price
 FROM Book
 JOIN Postings ON Book.Isbn = Posting.Books_ISBN
 WHERE Isbn = @Input OR Bookname = @Input OR Author = @Input OR Condition = @Input OR Edition = @Input
+ORDER BY TimePosted DESC
+
 
 --create procedure dbo.banAccount (@Phonenumber varchar(10))
 --AS
@@ -79,4 +81,9 @@ UPDATE Login
 SET Baned = True
 WHERE User_PhoneNum = @phonenumber
 
+--Intital Search
+SELECT  bookname, Author, FileName, Condition, Edition, TimePosted, Posting.User_PhoneNum, Price
+FROM Book
+JOIN Postings ON Book.Isbn = Posting.Books_ISBN
+ORDER BY TimePosted DESC
 
