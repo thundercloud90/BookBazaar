@@ -59,8 +59,28 @@ router.post('/delete', function (req, res) {
 
 // GET: Retrieve books according to a certain user or category
 router.get('/', function (req, res) {
-	
+	var sql = "SELECT * FROM Books JOIN Postings ON Books.Isbn = Postings.Books_ISBN ";
+
+	if(req.body.phonenumber !== undefined)
+	{
+		sql += "WHERE User_PhoneNum = " + mysql.escape(req.body.phonenumber);
+
+		dbConnection.query(sql, checkViewListings);
+	}
+	else
+	{
+		dbConnection.query(sql, checkViewListings);
+	}
 });
+
+// the callback function for viewListings
+function checkViewListings(err, rows)
+{
+	if(err)
+		res.send({success: 0, error: err});
+	else
+		res.send({success: 1, books: rows});
+}
 
 
 module.exports = router;

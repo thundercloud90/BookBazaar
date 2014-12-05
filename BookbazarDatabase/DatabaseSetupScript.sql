@@ -52,6 +52,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bookBazaar`.`Postings` (
   `Books_ISBN` INT(13) NOT NULL,
+  `Book_Price` FLOAT(2) NOT NULL,
   `User_PhoneNum` VARCHAR(10) NOT NULL,
   `Timeposted` DATETIME NOT NULL,
   PRIMARY KEY (`Books_ISBN`, `User_PhoneNum`),

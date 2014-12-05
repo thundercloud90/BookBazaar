@@ -11,8 +11,8 @@ AND Baned = 0
 --create procedure dbo.Viewlistings (@Phonenumber)
 --AS
 --Viewlistings
-SELECT bookname, filename, Author, FileName, Condition, Edition, TimePosted
-FROM Book
+SELECT *
+FROM Books
 JOIN Postings ON Book.Isbn = Posting.Books_ISBN
 WHERE User_PhoneNum = @Phonenumber
 
@@ -20,14 +20,14 @@ WHERE User_PhoneNum = @Phonenumber
 --create procedure dbo.Postlisting (@Book_ISBN, @Phonenumber, @TimeNow)
 --AS
 --Postlisting
-INSERT INTO Posting (Book_ISBN, Phonenumber, TimeNow)
+INSERT INTO Postings (Book_ISBN, Phonenumber, TimeNow)
 VALUES (@Book_ISBN, @Phonenumber, @TimeNow)
 
 --create procedure dbo.newBook (@Isbn, @Bookname, @filename, @Author, @FileName, @`Condition`, @`Edition`)
 --AS
 --And a new book to the table
-INSERT INTO Books (Isbn, Bookname, filename, Author, FileName, Condition, Edition)
-VALUES (@Isbn, @Bookname, @filename, @Author, @FileName, @Condition, @Edition)
+INSERT INTO Books (Isbn, Bookname, Author, FileName, Condition, Edition)
+VALUES (@Isbn, @Bookname, @Author, @FileName, @Condition, @Edition)
 
 
 --create procedure dbo.DeleteListing(@Book_ISBN)
