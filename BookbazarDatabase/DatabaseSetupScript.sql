@@ -52,8 +52,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bookBazaar`.`Postings` (
   `Books_ISBN` INT(13) NOT NULL,
+  `Book_Price` FLOAT(2) NOT NULL,
   `User_PhoneNum` VARCHAR(10) NOT NULL,
-  `Timeposted` DATETIME NOT NULL,
+  `Timeposted` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Books_ISBN`, `User_PhoneNum`),
   INDEX `fk_Postings_Books_idx` (`Books_ISBN` ASC),
   INDEX `fk_Postings_Users1_idx` (`User_PhoneNum` ASC),

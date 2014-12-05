@@ -13,23 +13,29 @@ AND Baned = 0
 --create procedure dbo.Viewlistings (@Phonenumber)
 --AS
 --Viewlistings
-SELECT bookname, filename, Author, FileName, Condition, Edition, TimePosted
-FROM Book
+SELECT *
+FROM Books
 JOIN Postings ON Book.Isbn = Posting.Books_ISBN
 WHERE User_PhoneNum = @Phonenumber
+ORDER BY TimePosted DESC
 
 
 --create procedure dbo.Postlisting (@Book_ISBN, @Phonenumber, @TimeNow)
 --AS
 --Postlisting
+<<<<<<< HEAD
+INSERT INTO Postings (Book_ISBN, Phonenumber, TimeNow)
+VALUES (@Book_ISBN, @Phonenumber, @TimeNow)
+=======
 INSERT INTO Posting (Book_ISBN, Phonenumber, TimeNow, Price)
 VALUES (@Book_ISBN, @Phonenumber, @TimeNow ,@Price)
+>>>>>>> 979845fce1409cf93617369e9c9d3a089c11d740
 
 --create procedure dbo.newBook (@Isbn, @Bookname, @filename, @Author, @FileName, @`Condition`, @`Edition`)
 --AS
 --And a new book to the table
-INSERT INTO Books (Isbn, Bookname, filename, Author, FileName, Condition, Edition)
-VALUES (@Isbn, @Bookname, @filename, @Author, @FileName, @Condition, @Edition)
+INSERT INTO Books (Isbn, Bookname, Author, FileName, Condition, Edition)
+VALUES (@Isbn, @Bookname, @Author, @FileName, @Condition, @Edition)
 
 
 --create procedure dbo.DeleteListing(@Book_ISBN)
@@ -69,7 +75,7 @@ WHERE ABuse.AbUsersNumber = @AbUsersNumber
 --create procedure dbo.Search (@Input)
 --AS
 --search listings
-SELECT DISTINCT bookname, Author, FileName, Condition, Edition, TimePosted, Posting.User_PhoneNum, Price
+SELECT DISTINCT *
 FROM Book
 JOIN Postings ON Book.Isbn = Posting.Books_ISBN
 WHERE Isbn = @Input OR Bookname = @Input OR Author = @Input OR Condition = @Input OR Edition = @Input

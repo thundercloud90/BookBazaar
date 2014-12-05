@@ -14,7 +14,7 @@ var logger = require('morgan');
 var mysql = require('mysql');
 var dbConnection = mysql.createConnection({
                   host     : 'localhost',
-                  database : 'mydb',
+                  database : 'bookbazaar',
                   user     : 'root',
                   password : ''
                 });
