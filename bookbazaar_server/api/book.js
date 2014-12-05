@@ -15,8 +15,8 @@ router.post('/', function (req, res) {
 	sql = mysql.format(sql, inserts);
 
 	// the query for the postings table
-	var postingsSql = "INSERT INTO Posting (Book_ISBN, Phonenumber) VALUES (?, ?)";
-	var postingInserts = [req.body.isbn, req.user.phonenumber];
+	var postingsSql = "INSERT INTO Postings (Book_ISBN, Book_Price, User_PhoneNum) VALUES (?, ?, ?)";
+	var postingInserts = [req.body.isbn, req.body.price, req.user.phonenumber];
 	postingsSql = mysql.format(postingsSql, postingInserts);
 
 	dbConnection.query(sql, function (err, rows){
@@ -57,6 +57,23 @@ router.post('/delete', function (req, res) {
 });
 
 
+// GET: search for a book
+router.get('/search', function (req, res){
+	var sql = "SELECT DISTINCT * FROM Books JOIN Postings ON Books.Isbn = Postings.Books_ISBN ";
+	sql += "WHERE Isbn = ? OR Bookname = ? OR Author = ? OR Condition = ? OR Edition = ? ";
+	sql += "ORDER BY TimePosted DESC";
+	var inserts = [req.body.isbn, req.body.bookname, req.body.author, req.body.condition, req.body.edition];
+	sql = mysql.format(sql, inserts);
+
+	dbConnection.query(sql, function (err, rows){
+		if(err)
+			res.send({success: 0, error: err});
+		else
+			res.send({success: 1, books: rows});
+	});
+});
+
+
 // GET: Retrieve books according to a certain user or category
 router.get('/', function (req, res) {
 	var sql = "SELECT * FROM Books JOIN Postings ON Books.Isbn = Postings.Books_ISBN ";
@@ -64,13 +81,10 @@ router.get('/', function (req, res) {
 	if(req.body.phonenumber !== undefined)
 	{
 		sql += "WHERE User_PhoneNum = " + mysql.escape(req.body.phonenumber);
+	}
 
-		dbConnection.query(sql, checkViewListings);
-	}
-	else
-	{
-		dbConnection.query(sql, checkViewListings);
-	}
+	sql += " ORDER BY TimePosted DESC";
+	dbConnection.query(sql, checkViewListings);
 });
 
 // the callback function for viewListings

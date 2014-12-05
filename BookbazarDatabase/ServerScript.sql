@@ -15,6 +15,7 @@ SELECT *
 FROM Books
 JOIN Postings ON Book.Isbn = Posting.Books_ISBN
 WHERE User_PhoneNum = @Phonenumber
+ORDER BY TimePosted DESC
 
 
 --create procedure dbo.Postlisting (@Book_ISBN, @Phonenumber, @TimeNow)
@@ -72,7 +73,7 @@ WHERE ABuse.AbUsersNumber = @AbUsersNumber
 --create procedure dbo.Search (@Input)
 --AS
 --search listings
-SELECT DISTINCT bookname, Author, FileName, Condition, Edition, TimePosted, Posting.User_PhoneNum, Price
+SELECT DISTINCT *
 FROM Book
 JOIN Postings ON Book.Isbn = Posting.Books_ISBN
 WHERE Isbn = @Input OR Bookname = @Input OR Author = @Input OR Condition = @Input OR Edition = @Input
