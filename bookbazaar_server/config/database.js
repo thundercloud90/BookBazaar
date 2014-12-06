@@ -3,8 +3,8 @@ var mysql = require('mysql');
 var dbConnection = mysql.createConnection({
                   host     : 'localhost',
                   database : 'bookBazaar',
-                  user     : 'root',
-                  password : ''
+                  user     : 'cs3450',
+                  password : 'cs3450'
                 });
 
 dbConnection.connect(function(err) {
