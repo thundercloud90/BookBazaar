@@ -76,9 +76,9 @@ WHERE ABuse.AbUsersNumber = @AbUsersNumber
 --AS
 --search listings
 SELECT DISTINCT *
-FROM Book
-JOIN Postings ON Book.Isbn = Posting.Books_ISBN
-WHERE Isbn = @Input OR Bookname = @Input OR Author = @Input OR Condition = @Input OR Edition = @Input
+FROM Books
+JOIN Postings ON Books.Isbn = Postings.Books_ISBN
+WHERE Isbn LIKE @Input OR Bookname LIKE @Input OR Author LIKE @Input
 ORDER BY TimePosted DESC
 
 
