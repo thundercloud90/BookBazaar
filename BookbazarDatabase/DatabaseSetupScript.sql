@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2014 at 10:41 AM
+-- Generation Time: Dec 06, 2014 at 10:53 AM
 -- Server version: 5.5.31
 -- PHP Version: 5.4.4-14+deb7u7
 
@@ -113,13 +113,50 @@ INSERT INTO `Login` (`UsersName`, `Password`, `User_PhoneNum`, `Baned`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `post`
+--
+
+CREATE TABLE IF NOT EXISTS `post` (
+  `postID` int(10) NOT NULL AUTO_INCREMENT,
+  `userID` int(10) NOT NULL,
+  `ISBN_num` varchar(50) NOT NULL,
+  `bookName` varchar(100) NOT NULL,
+  `bookAuthor` varchar(100) NOT NULL,
+  `bookCondition` varchar(20) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `bookPrice` float NOT NULL,
+  `imagePath` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`postID`),
+  KEY `FOREIGN` (`userID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`postID`, `userID`, `ISBN_num`, `bookName`, `bookAuthor`, `bookCondition`, `timestamp`, `bookPrice`, `imagePath`) VALUES
+(1, 1, '12345', 'The Facts of Life', 'Wade Wilkey', 'Wonderful', '2014-12-04 08:27:49', 1000000, 'book1.jpg'),
+(12, 22, '87987098', 'So Many Touchdowns', 'Joe Montana', 'Great\n', '2014-12-04 18:42:43', 49, 'book2.jpg'),
+(13, 22, '89089080', 'Me and Joe', '', 'Okay', '2014-12-04 16:30:07', 345, 'book3.jpg'),
+(15, 22, '12-389-2398-0', 'I Love Math', '', 'Good', '2014-12-04 16:30:48', 67.5, 'book5.jpg'),
+(16, 22, '1-2-3377', 'Textbook', '', 'Poor', '2014-12-04 16:31:00', 56, 'book6.jpg'),
+(18, 22, '28797-748', 'New One', '', 'A''ight', '2014-12-04 16:31:27', 60, 'book8.jpg'),
+(19, 24, '2985098', 'Hey There', '', 'Seen Better Days', '2014-12-04 16:31:13', 302, 'book9.jpg'),
+(21, 25, '1280-38973-2', 'Grease', '', '45.00', '2014-12-04 18:46:08', 45, 'book4.jpg'),
+(22, 24, '2389798', 'Science', '', '56', '2014-12-04 18:46:08', 56, 'book7.jpg'),
+(24, 24, '1-34-5879', 'Geology Book', 'Rocks', 'Pretty Good', '2014-12-04 18:46:08', 34, 'book2.jpg'),
+(25, 26, '3945720938', 'Science', 'Science Man', 'Great', '2014-12-04 19:31:33', 100, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Postings`
 --
 
 CREATE TABLE IF NOT EXISTS `Postings` (
   `Books_ISBN` varchar(13) NOT NULL,
   `User_PhoneNum` varchar(10) NOT NULL,
-  `Timeposted` datetime NOT NULL,
+  `Timeposted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Price` varchar(7) DEFAULT NULL,
   PRIMARY KEY (`Books_ISBN`,`User_PhoneNum`),
   KEY `fk_Postings_Books_idx` (`Books_ISBN`),
@@ -131,17 +168,68 @@ CREATE TABLE IF NOT EXISTS `Postings` (
 --
 
 INSERT INTO `Postings` (`Books_ISBN`, `User_PhoneNum`, `Timeposted`, `Price`) VALUES
-('1234567890122', '1122334455', '2014-12-03 19:20:41', '50.00'),
-('1234567890123', '1122334455', '2014-12-17 11:36:20', '520.00'),
-('1234567890123', '8761518469', '2014-12-01 12:34:48', '94.32'),
-('1234567890127', '8218721898', '2014-12-01 11:00:00', '615.21'),
-('1234567890127', '8761518469', '2014-12-03 12:34:00', '62'),
-('1234567890127', '9887517851', '2014-12-10 18:48:00', '9.00'),
-('1234567890129', '7892584562', '2014-12-05 10:36:30', '93.00'),
-('1234578987', '1234567890', '0000-00-00 00:00:00', '123'),
-('8465213652464', '1122334455', '2014-12-04 13:00:00', '5.02'),
-('8465213652464', '7892584562', '2014-12-25 13:26:37', '6.23'),
-('9865432151588', '1122334455', '2014-11-04 17:51:00', '65.42');
+('1234567890122', '1122334455', '2014-12-04 02:20:41', '50.00'),
+('1234567890122', '8761518469', '2014-12-06 17:53:10', '54'),
+('1234567890123', '1122334455', '2014-12-17 18:36:20', '520.00'),
+('1234567890123', '8761518469', '2014-12-01 19:34:48', '94.32'),
+('1234567890127', '8218721898', '2014-12-01 18:00:00', '615.21'),
+('1234567890127', '8761518469', '2014-12-03 19:34:00', '62'),
+('1234567890127', '9887517851', '2014-12-11 01:48:00', '9.00'),
+('1234567890129', '7892584562', '2014-12-05 17:36:30', '93.00'),
+('1234578987', '1234567890', '2014-12-03 07:37:46', '123'),
+('8465213652464', '1122334455', '2014-12-04 20:00:00', '5.02'),
+('8465213652464', '7892584562', '2014-12-25 20:26:37', '6.23'),
+('9865432151588', '1122334455', '2014-11-05 00:51:00', '65.42'),
+('9865432151588', '7892584562', '2014-11-05 18:39:00', '42.00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `timestamps`
+--
+
+CREATE TABLE IF NOT EXISTS `timestamps` (
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `firstName` varchar(50) NOT NULL,
+  `lastName` varchar(50) NOT NULL,
+  `emailAddr` varchar(50) NOT NULL,
+  `phoneNumber` varchar(20) NOT NULL,
+  `isAdmin` tinyint(1) NOT NULL DEFAULT '0',
+  `city` varchar(50) NOT NULL DEFAULT 'Unknown',
+  `state` varchar(2) NOT NULL DEFAULT 'NA',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `firstName`, `lastName`, `emailAddr`, `phoneNumber`, `isAdmin`, `city`, `state`) VALUES
+(1, 'cs3450', 'cs3450', 'Test', 'User', '', '', 1, 'Unknown', 'NA'),
+(4, 'johntest', 'test', 'john', 'doe', 'john.doe@gmail.com', '1234567890', 0, 'Logan', 'UT'),
+(5, 'test', 'test', 'test', 'test', 'test', 'test', 0, 'test', 'te'),
+(6, 'servTest', 'servTest', 'Service', 'Test', 'serv.test@gmail.com', '4353838383', 0, 'Logan', 'UT'),
+(11, 'servTesr', 'servTest', 'Service', 'Test', 'serv.test@gmail.com', '4353838383', 0, 'Logan', 'UT'),
+(21, 'john', 'john', 'John', 'Doe', 'john.doe@gmail.com', '4444444444', 0, 'Smithfield', 'UT'),
+(22, 'papajoe', 'joejoe', 'Joe', 'Montana', 'joe.monty@gm.com', '1234898', 1, 'San Fran', 'UT'),
+(23, 'Jim', 'jim', 'Jim', 'Halpert', 'jimjim@halpert.com', '', 0, 'Utica', 'UT'),
+(24, 'admin', 'admin', 'admin', 'admin', 'admin@bookbazaar.com', '1234567890', 1, 'NA', 'NA'),
+(25, 'johnnyt', 'joe', 'John', 'Travolta', 'johnnyt@t.com', '132413897', 0, 'LA', 'UT'),
+(26, 'user', 'user', 'User', 'User', 'user@user.com', '1233454564', 0, 'Logan', 'UT');
 
 -- --------------------------------------------------------
 
@@ -194,6 +282,12 @@ ALTER TABLE `Abuse`
 --
 ALTER TABLE `Login`
   ADD CONSTRAINT `fk_Login_Users1` FOREIGN KEY (`User_PhoneNum`) REFERENCES `Users` (`PhoneNum`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `post`
+--
+ALTER TABLE `post`
+  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Postings`
