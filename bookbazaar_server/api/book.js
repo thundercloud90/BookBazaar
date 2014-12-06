@@ -110,11 +110,11 @@ router.get('/', function (req, res, next) {
 
 	sql += " ORDER BY `TimePosted` DESC";
 
-	dbConnection.query(sql, checkViewListings);
+	dbConnection.query(res, sql, checkViewListings);
 });
 
 // the callback function for viewListings
-function checkViewListings(err, rows)
+function checkViewListings(res, err, rows)
 {
 	if(err)
 		res.send({success: 0, error: err});
