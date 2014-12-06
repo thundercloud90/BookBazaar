@@ -98,6 +98,7 @@ WHERE PhoneNum = @phonenumber
 
 --Create User
 INSERT INTO Users (PhoneNum, FirstName, LastName, Street, City, State, ZipCode, IsAdmin, AvatarFilename)
-value (@PhoneNum, @FirstName, @LastName, @Street, @City, @State, @ZipCode, @IsAdmin, @AvatarFilename)
+VALUES (@PhoneNum, @FirstName, @LastName, @Street, @City, @State, @ZipCode, @IsAdmin, @AvatarFilename)
+
 INSERT INTO Login (UsersName, Password, User_PhoneNum)
-value (@UsersName, @Password, @PhoneNum)
+VALUES (@UsersName, @Password, @PhoneNum)
