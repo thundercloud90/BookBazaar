@@ -1,10 +1,9 @@
-<<<<<<< HEAD
 -- phpMyAdmin SQL Dump
 -- version 3.4.11.1deb2
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2014 at 10:20 AM
+-- Generation Time: Dec 06, 2014 at 10:41 AM
 -- Server version: 5.5.31
 -- PHP Version: 5.4.4-14+deb7u7
 
@@ -132,17 +131,17 @@ CREATE TABLE IF NOT EXISTS `Postings` (
 --
 
 INSERT INTO `Postings` (`Books_ISBN`, `User_PhoneNum`, `Timeposted`, `Price`) VALUES
-('1234567890122', '1122334455', '0000-00-00 00:00:00', '50.00'),
+('1234567890122', '1122334455', '2014-12-03 19:20:41', '50.00'),
 ('1234567890123', '1122334455', '2014-12-17 11:36:20', '520.00'),
-('1234567890123', '8761518469', '0000-00-00 00:00:00', NULL),
-('1234567890127', '8218721898', '0000-00-00 00:00:00', NULL),
-('1234567890127', '8761518469', '0000-00-00 00:00:00', NULL),
-('1234567890127', '9887517851', '0000-00-00 00:00:00', NULL),
-('1234567890129', '7892584562', '0000-00-00 00:00:00', NULL),
+('1234567890123', '8761518469', '2014-12-01 12:34:48', '94.32'),
+('1234567890127', '8218721898', '2014-12-01 11:00:00', '615.21'),
+('1234567890127', '8761518469', '2014-12-03 12:34:00', '62'),
+('1234567890127', '9887517851', '2014-12-10 18:48:00', '9.00'),
+('1234567890129', '7892584562', '2014-12-05 10:36:30', '93.00'),
 ('1234578987', '1234567890', '0000-00-00 00:00:00', '123'),
-('8465213652464', '1122334455', '0000-00-00 00:00:00', NULL),
-('8465213652464', '7892584562', '0000-00-00 00:00:00', NULL),
-('9865432151588', '1122334455', '0000-00-00 00:00:00', NULL);
+('8465213652464', '1122334455', '2014-12-04 13:00:00', '5.02'),
+('8465213652464', '7892584562', '2014-12-25 13:26:37', '6.23'),
+('9865432151588', '1122334455', '2014-11-04 17:51:00', '65.42');
 
 -- --------------------------------------------------------
 
@@ -206,120 +205,3 @@ ALTER TABLE `Postings`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-=======
-﻿SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
--- -----------------------------------------------------
--- Schema bookBazaar
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema bookBazaar
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `bookBazaar` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `bookBazaar` ;
-
--- -----------------------------------------------------
--- Table `bookBazaar`.`Users`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bookBazaar`.`Users` (
-  `PhoneNum` VARCHAR(10) NOT NULL,
-  `FirstName` VARCHAR(45) NOT NULL,
-  `LastName` VARCHAR(45) NOT NULL,
-  `Street` VARCHAR(45) NOT NULL,
-  `City` VARCHAR(45) NOT NULL,
-  `State` VARCHAR(45) NOT NULL,
-  `ZipCode` VARCHAR(45) NOT NULL,
-  `IsAdmin` TINYINT(1) NOT NULL DEFAULT 0,
-  `AvatarFileName` VARCHAR(45) NULL,
-  `Email` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`PhoneNum`),
-  UNIQUE INDEX `PhoneNum_UNIQUE` (`PhoneNum` ASC),
-  UNIQUE INDEX `Email_UNIQUE` (`Email` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `bookBazaar`.`Books`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bookBazaar`.`Books` (
-  `ISBN` VARCHAR(13) NOT NULL,
-  `BookName` VARCHAR(45) NULL,
-  `Author` VARCHAR(45) NULL,
-  `FileName` VARCHAR(45) NULL,
-  `Condition` VARCHAR(45) NULL,
-  `Edition` VARCHAR(45) NULL,
-  PRIMARY KEY (`ISBN`),
-  UNIQUE INDEX `idBooks_UNIQUE` (`ISBN` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `bookBazaar`.`Postings`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bookBazaar`.`Postings` (
-  `Books_ISBN` INT(13) NOT NULL,
-  `Book_Price` FLOAT(2) NOT NULL,
-  `User_PhoneNum` VARCHAR(10) NOT NULL,
-  `Timeposted` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`Books_ISBN`, `User_PhoneNum`),
-  INDEX `fk_Postings_Books_idx` (`Books_ISBN` ASC),
-  INDEX `fk_Postings_Users1_idx` (`User_PhoneNum` ASC),
-  UNIQUE INDEX `Books_ISBN_UNIQUE` (`Books_ISBN` ASC),
-  UNIQUE INDEX `User_PhoneNum_UNIQUE` (`User_PhoneNum` ASC),
-  CONSTRAINT `fk_Postings_Books`
-    FOREIGN KEY (`Books_ISBN`)
-    REFERENCES `bookBazaar`.`Books` (`ISBN`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Postings_Users1`
-    FOREIGN KEY (`User_PhoneNum`)
-    REFERENCES `bookBazaar`.`Users` (`PhoneNum`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `bookBazaar`.`Login`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bookBazaar`.`Login` (
-  `UserName` VARCHAR(45) NOT NULL,
-  `Password` VARCHAR(45) NOT NULL,
-  `User_PhoneNum` VARCHAR(10) NOT NULL,
-  `Baned` TINYINT(1) NOT NULL DEFAULT 0,
-  UNIQUE INDEX `UsersName_UNIQUE` (`UsersName` ASC),
-  PRIMARY KEY (`User_PhoneNum`),
-  CONSTRAINT `fk_Login_Users1`
-    FOREIGN KEY (`User_PhoneNum`)
-    REFERENCES `bookBazaar`.`Users` (`PhoneNum`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `bookBazaar`.`Abuse`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bookBazaar`.`Abuse` (
-  `AbUsersNumber` INT NOT NULL AUTO_INCREMENT,
-  `Report` VARCHAR(8000) NULL,
-  `User_PhoneNum` VARCHAR(10) NOT NULL,
-  `Solved` TINYINT(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`AbUsersNumber`, `User_PhoneNum`),
-  UNIQUE INDEX `Abuse_UNIQUE` (`AbUsersNumber` ASC),
-  INDEX `fk_Abuse_Users1_idx` (`User_PhoneNum` ASC),
-  CONSTRAINT `fk_Abuse_Users1`
-    FOREIGN KEY (`User_PhoneNum`)
-    REFERENCES `bookBazaar`.`Users` (`PhoneNum`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
->>>>>>> 146b25c740b8850f66c1a6518291aa53dc0c3320
