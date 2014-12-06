@@ -102,7 +102,7 @@ router.get('/search', function (req, res, next){
 // GET: Retrieve books according to a certain user or all
 router.get('/', function (req, res, next) {
 	var sql = "SELECT * FROM books JOIN postings ON `books`.`ISBN` = `postings`.`books_ISBN` ";
-
+	console.log(req.query.phonenumber);
 	if(req.query.phonenumber !== undefined)
 	{
 		sql += "WHERE `User_PhoneNum` = " + mysql.escape(req.query.phonenumber);
@@ -110,17 +110,12 @@ router.get('/', function (req, res, next) {
 
 	sql += " ORDER BY `TimePosted` DESC";
 
-	dbConnection.query(res, sql, checkViewListings);
+	dbConnection.query(sql, function (err, rows){
+		if(err)
+			res.json({success: 0, error: err});
+		else
+			res.json({success: 1, books: rows});
+	});
 });
-
-// the callback function for viewListings
-function checkViewListings(res, err, rows)
-{
-	if(err)
-		res.send({success: 0, error: err});
-	else
-		res.send({success: 1, books: rows});
-}
-
 
 module.exports = router;
