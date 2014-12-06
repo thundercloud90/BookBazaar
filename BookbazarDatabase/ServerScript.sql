@@ -23,13 +23,8 @@ ORDER BY TimePosted DESC
 --create procedure dbo.Postlisting (@Book_ISBN, @Phonenumber, @TimeNow)
 --AS
 --Postlisting
-<<<<<<< HEAD
-INSERT INTO Postings (Book_ISBN, Phonenumber, TimeNow)
-VALUES (@Book_ISBN, @Phonenumber, @TimeNow)
-=======
 INSERT INTO Posting (Book_ISBN, Phonenumber, TimeNow, Price)
 VALUES (@Book_ISBN, @Phonenumber, @TimeNow ,@Price)
->>>>>>> 979845fce1409cf93617369e9c9d3a089c11d740
 
 --create procedure dbo.newBook (@Isbn, @Bookname, @filename, @Author, @FileName, @`Condition`, @`Edition`)
 --AS
@@ -75,10 +70,11 @@ WHERE ABuse.AbUsersNumber = @AbUsersNumber
 --create procedure dbo.Search (@Input)
 --AS
 --search listings
-SELECT DISTINCT *
-FROM Books
+SELECT * FROM Books 
 JOIN Postings ON Books.Isbn = Postings.Books_ISBN
-WHERE Isbn LIKE @Input OR Bookname LIKE @Input OR Author LIKE @Input
+WHERE lower(Isbn)= lower(@Input) 
+OR lower(Bookname) = lower(@Input) 
+OR lower(Author) = lower(@Input)
 ORDER BY TimePosted DESC
 
 
