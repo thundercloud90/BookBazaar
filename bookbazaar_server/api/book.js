@@ -80,9 +80,9 @@ router.post('/delete', function (req, res, next) {
 router.get('/search', function (req, res, next){
 	var sql = "SELECT DISTINCT * "
 	sql += "FROM books JOIN postings ON `books`.`ISBN` = `postings`.`Books_ISBN` ";
-	sql += "WHERE `ISBN` LIKE ? OR `BookName` LIKE ? OR `Author` LIKE ? OR `Condition` LIKE ? OR `Edition` LIKE ? ";
+	sql += "WHERE `ISBN` LIKE ? OR `BookName` = ? OR `Author` LIKE ? OR `Condition` LIKE ? OR `Edition` LIKE ? ";
 	sql += "ORDER BY `Timeposted` DESC";
-	var inserts = [req.query.isbn !== undefined ? req.query.isbn : 0];
+	var inserts = [req.query.isbn !== undefined ? req.query.isbn : ""];
 	inserts.push(req.query.bookname !== undefined ? req.query.bookname : "");
 	inserts.push(req.query.author !== undefined ? req.query.author : "");
 	inserts.push(req.query.condition !== undefined ? req.query.condition : "");
@@ -92,16 +92,16 @@ router.get('/search', function (req, res, next){
 
 	dbConnection.query(sql, function (err, rows){
 		if(err)
-			res.send({success: 0, error: err});
+			res.json({success: 0, error: err});
 		else
-			res.send({success: 1, books: rows});
+			res.json({success: 1, books: rows});
 	});
 });
 
 
 // GET: Retrieve books according to a certain user or all
 router.get('/', function (req, res, next) {
-	var sql = "SELECT * FROM books JOIN postings ON `books`.`ISBN` = `postings`.`books_ISBN` ";
+	var sql = "SELECT * FROM Books JOIN Postings ON `books`.`ISBN` = `postings`.`books_ISBN` ";
 	console.log(req.query.phonenumber);
 	if(req.query.phonenumber !== undefined)
 	{
