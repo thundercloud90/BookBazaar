@@ -10,13 +10,13 @@ var dbConnection = require('../config/database');
 router.post('/', function (req, res, next) {
 	
 	// the query for the book table
-	var sql = "INSERT INTO books (`ISBN`, `BookName`, `Author`, `Condition`, `Edition`) VALUES (?, ?, ?, ?, ?)";
+	var sql = "INSERT INTO Books (`ISBN`, `BookName`, `Author`, `Condition`, `Edition`) VALUES (?, ?, ?, ?, ?)";
 	var inserts = [req.body.isbn, req.body.bookname, req.body.author, req.body.condition, req.body.edition];
 	sql = mysql.format(sql, inserts);
 
 	var postingInserts = [req.body.isbn, req.body.price, req.body.phonenumber];
 
-	var test = "SELECT * FROM books WHERE `ISBN` = "+mysql.escape(req.body.isbn);
+	var test = "SELECT * FROM Books WHERE `ISBN` = "+mysql.escape(req.body.isbn);
 	console.log(test);
 
 	dbConnection.query(test, function (err, rows){
@@ -40,12 +40,12 @@ router.post('/', function (req, res, next) {
 });
 
 function postBook (req, res, postingInserts){
-	// the query for the postings table
-	var postingsSql = "INSERT INTO postings (`Books_ISBN`, `Book_Price`, `User_PhoneNum`) VALUES (?, ?, ?)";
-	postingsSql = mysql.format(postingsSql, postingInserts);
+	// the query for the Postings table
+	var PostingsSql = "INSERT INTO Postings (`Books_ISBN`, `Book_Price`, `User_PhoneNum`) VALUES (?, ?, ?)";
+	PostingsSql = mysql.format(PostingsSql, postingInserts);
 
-	console.log("adding to postings");
-	dbConnection.query(postingsSql, function (err, rows){ // either way add the posting
+	console.log("adding to Postings");
+	dbConnection.query(PostingsSql, function (err, rows){ // either way add the posting
 		if(err)
 			res.json({success: 0, error: err});
 		else
@@ -79,7 +79,7 @@ router.post('/delete', function (req, res, next) {
 // GET: search for a book
 router.get('/search', function (req, res, next){
 	var sql = "SELECT DISTINCT * "
-	sql += "FROM books JOIN postings ON `books`.`ISBN` = `postings`.`Books_ISBN` ";
+	sql += "FROM Books JOIN Postings ON `Books`.`ISBN` = `Postings`.`Books_ISBN` ";
 	sql += "WHERE `ISBN` LIKE ? OR `BookName` = ? OR `Author` LIKE ? OR `Condition` LIKE ? OR `Edition` LIKE ? ";
 	sql += "ORDER BY `Timeposted` DESC";
 	var inserts = [req.query.isbn !== undefined ? req.query.isbn : ""];
@@ -99,9 +99,9 @@ router.get('/search', function (req, res, next){
 });
 
 
-// GET: Retrieve books according to a certain user or all
+// GET: Retrieve Books according to a certain user or all
 router.get('/', function (req, res, next) {
-	var sql = "SELECT * FROM Books JOIN Postings ON `books`.`ISBN` = `postings`.`books_ISBN` ";
+	var sql = "SELECT * FROM Books JOIN Postings ON `Books`.`ISBN` = `Postings`.`Books_ISBN` ";
 	console.log(req.query.phonenumber);
 	if(req.query.phonenumber !== undefined)
 	{
