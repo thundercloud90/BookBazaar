@@ -14,33 +14,44 @@ router.post('/', function (req, res, next) {
 	var inserts = [req.body.isbn, req.body.bookname, req.body.author, req.body.condition, req.body.edition];
 	sql = mysql.format(sql, inserts);
 
-	// the query for the postings table
-	var postingsSql = "INSERT INTO postings (`Books_ISBN`, `Book_Price`, `User_PhoneNum`) VALUES (?, ?, ?)";
 	var postingInserts = [req.body.isbn, req.body.price, req.body.phonenumber];
-	postingsSql = mysql.format(postingsSql, postingInserts);
 
 	var test = "SELECT * FROM books WHERE `ISBN` = "+mysql.escape(req.body.isbn);
+	console.log(test);
 
 	dbConnection.query(test, function (err, rows){
 		if(err){
+			if(err.errno == 1062){
+				console.log("book doesn't exist");
+				console.log(sql);
+				dbConnection.query(sql, function (err, rows){
+					if(err)
+						res.json({success: 0, error: err});
+					else
+						postBook(req, res, postingInserts);
+				});
+			}
 			res.json({success: 0, error: err});
 			return;
 		}
-		else if(rows.length == 0){  // if the book doesn't exist create a new one
-			
-			dbConnection.query(sql, function (err, rows){
-				if(err)
-					res.json({success: 0, error: err});
-			});
-		}
-		dbConnection.query(postingsSql, function (err, rows){ // either way add the posting
-			if(err)
-				res.json({success: 0, error: err});
-			else
-				res.json({success: 1});
-		});
+		else
+			postBook(req, res, postingInserts);
 	});
 });
+
+function postBook (req, res, postingInserts){
+	// the query for the postings table
+	var postingsSql = "INSERT INTO postings (`Books_ISBN`, `Book_Price`, `User_PhoneNum`) VALUES (?, ?, ?)";
+	postingsSql = mysql.format(postingsSql, postingInserts);
+
+	console.log("adding to postings");
+	dbConnection.query(postingsSql, function (err, rows){ // either way add the posting
+		if(err)
+			res.json({success: 0, error: err});
+		else
+			res.json({success: 1});
+	});
+};
 
 
 // POST: Update a book posting
@@ -67,9 +78,9 @@ router.post('/delete', function (req, res, next) {
 
 // GET: search for a book
 router.get('/search', function (req, res, next){
-	var sql = "SELECT DISTINCT `BookName`, `Author`, `FileName`, `Condition`, `Edition`, `TimePosted`, `Postings`.`User_PhoneNum`, `Price`"
-	sql += "FROM books JOIN postings ON `books.ISBN` = `postings.Books_ISBN` ";
-	sql += "WHERE `ISBN` = ? OR `BookName` = ? OR `Author` = ? OR `Condition` = ? OR `Edition` = ? ";
+	var sql = "SELECT DISTINCT * "
+	sql += "FROM books JOIN postings ON `books`.`ISBN` = `postings`.`Books_ISBN` ";
+	sql += "WHERE `ISBN` LIKE ? OR `BookName` LIKE ? OR `Author` LIKE ? OR `Condition` LIKE ? OR `Edition` LIKE ? ";
 	sql += "ORDER BY `Timeposted` DESC";
 	var inserts = [req.query.isbn !== undefined ? req.query.isbn : 0];
 	inserts.push(req.query.bookname !== undefined ? req.query.bookname : "");
@@ -88,7 +99,7 @@ router.get('/search', function (req, res, next){
 });
 
 
-// GET: Retrieve books according to a certain user or category
+// GET: Retrieve books according to a certain user or all
 router.get('/', function (req, res, next) {
 	var sql = "SELECT * FROM books JOIN postings ON `books`.`ISBN` = `postings`.`books_ISBN` ";
 

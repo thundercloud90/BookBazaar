@@ -36,7 +36,7 @@ ENGINE = InnoDB;
 -- Table `bookBazaar`.`Books`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bookBazaar`.`Books` (
-  `ISBN` INT(13) NOT NULL,
+  `ISBN` VARCHAR(13) NOT NULL,
   `BookName` VARCHAR(45) NULL,
   `Author` VARCHAR(45) NULL,
   `FileName` VARCHAR(45) NULL,
