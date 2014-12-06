@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2014 at 10:53 AM
+-- Generation Time: Dec 06, 2014 at 11:03 AM
 -- Server version: 5.5.31
 -- PHP Version: 5.4.4-14+deb7u7
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `bookBazaar`
 --
+CREATE DATABASE `bookBazaar` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `bookBazaar`;
 
 -- --------------------------------------------------------
 
@@ -113,6 +115,77 @@ INSERT INTO `Login` (`UsersName`, `Password`, `User_PhoneNum`, `Baned`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Postings`
+--
+
+CREATE TABLE IF NOT EXISTS `Postings` (
+  `Books_ISBN` varchar(13) NOT NULL,
+  `User_PhoneNum` varchar(10) NOT NULL,
+  `Timeposted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Price` varchar(7) DEFAULT NULL,
+  PRIMARY KEY (`Books_ISBN`,`User_PhoneNum`),
+  KEY `fk_Postings_Books_idx` (`Books_ISBN`),
+  KEY `fk_Postings_Users1_idx` (`User_PhoneNum`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Postings`
+--
+
+INSERT INTO `Postings` (`Books_ISBN`, `User_PhoneNum`, `Timeposted`, `Price`) VALUES
+('1234567890122', '1122334455', '2014-12-04 02:20:41', '50.00'),
+('1234567890122', '8761518469', '2014-12-06 17:53:10', '54'),
+('1234567890123', '1122334455', '2014-12-17 18:36:20', '520.00'),
+('1234567890123', '8761518469', '2014-12-01 19:34:48', '94.32'),
+('1234567890127', '8218721898', '2014-12-01 18:00:00', '615.21'),
+('1234567890127', '8761518469', '2014-12-03 19:34:00', '62'),
+('1234567890127', '9887517851', '2014-12-11 01:48:00', '9.00'),
+('1234567890129', '7892584562', '2014-12-05 17:36:30', '93.00'),
+('1234578987', '1234567890', '2014-12-03 07:37:46', '123'),
+('8465213652464', '1122334455', '2014-12-04 20:00:00', '5.02'),
+('8465213652464', '7892584562', '2014-12-25 20:26:37', '6.23'),
+('9865432151588', '1122334455', '2014-11-05 00:51:00', '65.42'),
+('9865432151588', '7892584562', '2014-11-05 18:39:00', '42.00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Users`
+--
+
+CREATE TABLE IF NOT EXISTS `Users` (
+  `PhoneNum` varchar(10) NOT NULL,
+  `FirstName` varchar(45) NOT NULL,
+  `LastName` varchar(45) NOT NULL,
+  `Street` varchar(45) NOT NULL,
+  `City` varchar(45) NOT NULL,
+  `State` varchar(45) NOT NULL,
+  `ZipCode` varchar(45) NOT NULL,
+  `IsAdmin` tinyint(1) NOT NULL DEFAULT '0',
+  `AvatarFileName` varchar(45) DEFAULT NULL,
+  `Email` varchar(45) NOT NULL,
+  PRIMARY KEY (`PhoneNum`),
+  UNIQUE KEY `PhoneNum_UNIQUE` (`PhoneNum`),
+  UNIQUE KEY `Email_UNIQUE` (`Email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Users`
+--
+
+INSERT INTO `Users` (`PhoneNum`, `FirstName`, `LastName`, `Street`, `City`, `State`, `ZipCode`, `IsAdmin`, `AvatarFileName`, `Email`) VALUES
+('1122334455', 'Jo', 'Shamo', '9818 street dr', 'Logan', 'utah', '84321', 0, 'myfile.png', 'JoShamo@gmail.com'),
+('1234567890', 'Stan', 'The Man', '45 Yo House way', 'ThatOne', 'utah', '84084', 1, 'myfile.png', 'StanTheMan@yahoo.com'),
+('7892584562', 'Barney', 'Thedinosoure', '123 abc', '98 sesmee st', 'kiddies', '74568', 0, 'Default.jpg', 'MassYra@re.com'),
+('7894560123', 'Bilbo', 'Baggins', '1 holeintheground st', 'Shire', 'MiddleEarth', '85274', 1, 'Default.jpg', 'theonering@morador.gov'),
+('8218721898', 'Clit', 'Eastwood', '123 Dirty Harry ln', 'Feelingluck', 'Areya', '45784', 0, 'Default.jpg', 'biggunGuy@inyoface.com'),
+('8761518469', 'Happy', 'Feet', '485 asdf dr', 'lkjhpoiu', 'zawsx', '98487', 0, 'Default.jpg', 'Ithinkican@gmail.com'),
+('9632587410', 'Josh', 'Massy', '45 Yo House way', 'lkjhpoiu', 'Texus', '52140', 0, 'Default.jpg', 'saturdaynightride@now.net'),
+('9887517851', 'Darth', 'Vader', '9875 DeathStar rd.', 'A Galaxy', 'Far Far Away', '99999', 0, 'Default.jpg', 'Imakemyown@happyhome.net');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `post`
 --
 
@@ -146,41 +219,6 @@ INSERT INTO `post` (`postID`, `userID`, `ISBN_num`, `bookName`, `bookAuthor`, `b
 (22, 24, '2389798', 'Science', '', '56', '2014-12-04 18:46:08', 56, 'book7.jpg'),
 (24, 24, '1-34-5879', 'Geology Book', 'Rocks', 'Pretty Good', '2014-12-04 18:46:08', 34, 'book2.jpg'),
 (25, 26, '3945720938', 'Science', 'Science Man', 'Great', '2014-12-04 19:31:33', 100, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Postings`
---
-
-CREATE TABLE IF NOT EXISTS `Postings` (
-  `Books_ISBN` varchar(13) NOT NULL,
-  `User_PhoneNum` varchar(10) NOT NULL,
-  `Timeposted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Price` varchar(7) DEFAULT NULL,
-  PRIMARY KEY (`Books_ISBN`,`User_PhoneNum`),
-  KEY `fk_Postings_Books_idx` (`Books_ISBN`),
-  KEY `fk_Postings_Users1_idx` (`User_PhoneNum`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `Postings`
---
-
-INSERT INTO `Postings` (`Books_ISBN`, `User_PhoneNum`, `Timeposted`, `Price`) VALUES
-('1234567890122', '1122334455', '2014-12-04 02:20:41', '50.00'),
-('1234567890122', '8761518469', '2014-12-06 17:53:10', '54'),
-('1234567890123', '1122334455', '2014-12-17 18:36:20', '520.00'),
-('1234567890123', '8761518469', '2014-12-01 19:34:48', '94.32'),
-('1234567890127', '8218721898', '2014-12-01 18:00:00', '615.21'),
-('1234567890127', '8761518469', '2014-12-03 19:34:00', '62'),
-('1234567890127', '9887517851', '2014-12-11 01:48:00', '9.00'),
-('1234567890129', '7892584562', '2014-12-05 17:36:30', '93.00'),
-('1234578987', '1234567890', '2014-12-03 07:37:46', '123'),
-('8465213652464', '1122334455', '2014-12-04 20:00:00', '5.02'),
-('8465213652464', '7892584562', '2014-12-25 20:26:37', '6.23'),
-('9865432151588', '1122334455', '2014-11-05 00:51:00', '65.42'),
-('9865432151588', '7892584562', '2014-11-05 18:39:00', '42.00');
 
 -- --------------------------------------------------------
 
@@ -231,42 +269,6 @@ INSERT INTO `user` (`id`, `username`, `password`, `firstName`, `lastName`, `emai
 (25, 'johnnyt', 'joe', 'John', 'Travolta', 'johnnyt@t.com', '132413897', 0, 'LA', 'UT'),
 (26, 'user', 'user', 'User', 'User', 'user@user.com', '1233454564', 0, 'Logan', 'UT');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `Users`
---
-
-CREATE TABLE IF NOT EXISTS `Users` (
-  `PhoneNum` varchar(10) NOT NULL,
-  `FirstName` varchar(45) NOT NULL,
-  `LastName` varchar(45) NOT NULL,
-  `Street` varchar(45) NOT NULL,
-  `City` varchar(45) NOT NULL,
-  `State` varchar(45) NOT NULL,
-  `ZipCode` varchar(45) NOT NULL,
-  `IsAdmin` tinyint(1) NOT NULL DEFAULT '0',
-  `AvatarFileName` varchar(45) DEFAULT NULL,
-  `Email` varchar(45) NOT NULL,
-  PRIMARY KEY (`PhoneNum`),
-  UNIQUE KEY `PhoneNum_UNIQUE` (`PhoneNum`),
-  UNIQUE KEY `Email_UNIQUE` (`Email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `Users`
---
-
-INSERT INTO `Users` (`PhoneNum`, `FirstName`, `LastName`, `Street`, `City`, `State`, `ZipCode`, `IsAdmin`, `AvatarFileName`, `Email`) VALUES
-('1122334455', 'Jo', 'Shamo', '9818 street dr', 'Logan', 'utah', '84321', 0, 'myfile.png', 'JoShamo@gmail.com'),
-('1234567890', 'Stan', 'The Man', '45 Yo House way', 'ThatOne', 'utah', '84084', 1, 'myfile.png', 'StanTheMan@yahoo.com'),
-('7892584562', 'Barney', 'Thedinosoure', '123 abc', '98 sesmee st', 'kiddies', '74568', 0, 'Default.jpg', 'MassYra@re.com'),
-('7894560123', 'Bilbo', 'Baggins', '1 holeintheground st', 'Shire', 'MiddleEarth', '85274', 1, 'Default.jpg', 'theonering@morador.gov'),
-('8218721898', 'Clit', 'Eastwood', '123 Dirty Harry ln', 'Feelingluck', 'Areya', '45784', 0, 'Default.jpg', 'biggunGuy@inyoface.com'),
-('8761518469', 'Happy', 'Feet', '485 asdf dr', 'lkjhpoiu', 'zawsx', '98487', 0, 'Default.jpg', 'Ithinkican@gmail.com'),
-('9632587410', 'Josh', 'Massy', '45 Yo House way', 'lkjhpoiu', 'Texus', '52140', 0, 'Default.jpg', 'saturdaynightride@now.net'),
-('9887517851', 'Darth', 'Vader', '9875 DeathStar rd.', 'A Galaxy', 'Far Far Away', '99999', 0, 'Default.jpg', 'Imakemyown@happyhome.net');
-
 --
 -- Constraints for dumped tables
 --
@@ -284,17 +286,17 @@ ALTER TABLE `Login`
   ADD CONSTRAINT `fk_Login_Users1` FOREIGN KEY (`User_PhoneNum`) REFERENCES `Users` (`PhoneNum`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `post`
---
-ALTER TABLE `post`
-  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `Postings`
 --
 ALTER TABLE `Postings`
   ADD CONSTRAINT `fk_Postings_Books` FOREIGN KEY (`Books_ISBN`) REFERENCES `Books` (`ISBN`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Postings_Users1` FOREIGN KEY (`User_PhoneNum`) REFERENCES `Users` (`PhoneNum`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `post`
+--
+ALTER TABLE `post`
+  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
