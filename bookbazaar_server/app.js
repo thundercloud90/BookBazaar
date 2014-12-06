@@ -18,8 +18,6 @@ var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 
 // routing files
-//var routes = require('./routes/index');
-var passport = require('./config/passport');
 var user = require('./api/user');
 var book = require('./api/book');
 var abuse = require('./api/abuse');
@@ -42,7 +40,6 @@ app.use(session({
     secret: 'B00kb@3aAR' 
   }));
 
-app.use('/account', passport);
 app.use('/user', user);
 app.use('/book', book);
 app.use('/abuse', abuse);

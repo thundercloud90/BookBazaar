@@ -8,34 +8,50 @@ var dbConnection = require('../config/database');
 
 // POST: create an account
 router.post('/signup', function (req, res){
-	// find a user whose email is the same as the forms email
-	// we are checking to see if the user trying to login already exists
-    var sql = "SELECT * FROM Login WHERE `UserName` = "+dbConnection.escape(email);
+	// checks if the email is already used
+    var sql = "SELECT * FROM Login WHERE `UsersName` = "+mysql.escape(req.body.email);
     dbConnection.query(sql, function (err, rows){
 		if (err)
             res.json({success: 0, error: err});
-		if (rows.length) {
-            res.json({success: 0, error: "That email address is already taken."});
+		else if (rows.length) {
+            	res.json({success: 0, error: "That email address is already taken."});
         } 
         else {
+        	// checks if the phone number is already used
+        	sql = "SELECT * FROM Login WHERE `User_PhoneNum` = "+mysql.escape(req.body.phonenumber);
+        	dbConnection.query(sql, function (err, rows){
+				if(err)
+					res.json({success: 0, error: err});
+				else if(rows.length)
+					res.json({success: 0, error: "That phone number is already taken."});
+				else{
+					// if there is no user with that email or phone number
+		            // create the user in Users first then Login
+			    	var insertUsers = "INSERT INTO Users (`PhoneNum`, `Email`, `FirstName`, `LastName`, `Street`, `City`, `State`, `ZipCode`, `IsAdmin`, `AvatarFilename`) ";
+		            insertUsers += "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		            inserts = [req.body.phonenumber, req.body.email, req.body.firstname, req.body.lastname, req.body.street, req.body.city, req.body.state, req.body.zipcode, req.body.isadmin, req.body.avatarfilename];
+		            insertUsers = mysql.format(insertUsers, inserts);
+					
+					dbConnection.query(insertUsers, function (err,rows){
+					    if(err)
+		                    res.json({success: 0, error: err});
+					    else{
+				            var insertLogin = "INSERT INTO Login ( `UsersName`, `Password`, `User_PhoneNum` ) VALUES (?, ?, ?) ";
+				            var inserts = [req.body.email, req.body.password, req.body.phonenumber];
+				            insertLogin = mysql.format(insertLogin, inserts);
 
-			// if there is no user with that email
-            // create the user
-			var insertQuery = "INSERT INTO Login ( `UserName`, `Password`, `User_PhoneNum` ) VALUES (?, ?, ?)";
-            var inserts = [req.body.email, req.body.password, req.body.phonenumber];
-            insertQuery = mysql.format(insertQuery, inserts);
-            insertQuery += "INSERT INTO Users (`PhoneNum`, `Email`, `FirstName`, `LastName`, `Street`, `City`, `State`, `ZipCode`, `IsAdmin`, `AvatarFilename`) ";
-            insertQuery += "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            inserts = [req.body.phonenumber, req.body.email, req.body.firstname, req.body.lastname, req.body.street, req.body.city, req.body.state, req.body.zipcode, req.body.isadmin, req.body.avatarfilename];
-            insertQuery = mysql.format(insertQuery, inserts);
-
-			console.log(insertQuery);
-			dbConnection.query(insertQuery, function (err,rows){
-			    if(err)
-                    res.json({success: 0, error: err});
-			    else
-			    	res.json({success: 1})
-			});	
+					    	dbConnection.query(insertLogin, function (err, rows){
+					    		if(err)
+					    			res.json({success: 0, error: err});
+					    		else{
+					    			res.json({success: 1})
+					    		}	
+					    	});
+					    }
+					});	
+				}
+        	});
+			
         }	
 	});
 });
@@ -43,17 +59,17 @@ router.post('/signup', function (req, res){
 
 // POST: login to existing accound
 router.post('/login', function (req, res){
-	var sql = "SELECT * FROM Login WHERE `UserName` = " + dbConnection.escape(req.body.email);
+	var sql = "SELECT * FROM Login WHERE `UsersName` = " + mysql.escape(req.body.email);
     dbConnection.query(sql, function (err,rows){
 		if (err)
             res.json({success: 0, error: err});
-		else if (!rows.length) {
-            res.json({success: 0, error: "No user found."}); 
+		else if (rows.length == 0) {
+            res.json({success: 0, error: "No user with that email address was found."}); 
         } 
 		
 		// if the user is found but the password is wrong
-        else if (!( rows[0].password == password))
-            res.json({success: 0, error: "Incorrect password."});  // create the loginMessage and save it to session as flashdata
+        else if (!( rows[0].Password == req.body.password))
+            res.json({success: 0, error: "Incorrect password."});
 		
         else
         	res.json({success: 1, phonenumber: rows[0].User_PhoneNum})		
@@ -71,38 +87,30 @@ router.post('/update', function (req, res) {
 // POST: ban user
 router.post('/ban', function (req, res, next){
 	var sql = "UPDATE Login SET `Baned` = True WHERE `User_PhoneNum` = "+mysql.escape(req.body.phonenumber);
-	debug(sql);
 
 	dbConnection.query(sql, function (err, rows){
 		if(err)
-			res.send({success: 0, error: err});
+			res.json({success: 0, error: err});
 		else
-		{
-			res.send({success: 1});
-		}
-
+			res.json({success: 1});
 	});
-	next();
 });
 
 // GET: Check if Users is admin
 router.get('/checkadmin', function (req, res, next){
-	var sql = "SELECT `IsAdmin` FROM Users WHERE `PhoneNum` = " + mysql.escape(req.body.phonenumber);
-	debug(sql);
+	var sql = "SELECT `IsAdmin` FROM Users WHERE `PhoneNum` = " + mysql.escape(req.query.phonenumber);
+	console.log(sql);
 
 	dbConnection.query(sql, function (err, rows){
 		if(err)
-			res.send({success: 0, error: err});
+			res.json({success: 0, error: err});
+
+		else if(rows.length == 0)
+			res.json({success: 0, error: "User does not exist"});
+
 		else
-		{
-			
-			if(rows[0].IsAdmin == 0)
-				res.send({success: 1, IsAdmin: false});
-			else
-				res.send({success: 1, IsAdmin: true});
-		}
+			res.json({success: 1, IsAdmin: rows[0].IsAdmin});
 	});
-	next();
 });
 
 
@@ -114,7 +122,7 @@ router.get('/', function (req, res) {
 
 // GET: Delete account from database
 router.get('/delete', function (req, res) {
-  	
+	
 });
 
 
