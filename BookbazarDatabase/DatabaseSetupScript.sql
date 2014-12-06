@@ -77,7 +77,7 @@ ENGINE = InnoDB;
 -- Table `bookBazaar`.`Login`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bookBazaar`.`Login` (
-  `UsersName` VARCHAR(12) NOT NULL,
+  `UserName` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
   `User_PhoneNum` VARCHAR(10) NOT NULL,
   `Baned` TINYINT(1) NOT NULL DEFAULT 0,
@@ -108,14 +108,6 @@ CREATE TABLE IF NOT EXISTS `bookBazaar`.`Abuse` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `bookBazaar`.`timestamps`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bookBazaar`.`timestamps` (
-  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_time` TIMESTAMP NULL);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

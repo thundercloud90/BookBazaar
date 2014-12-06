@@ -42,14 +42,15 @@ app.use(session({
     secret: 'B00kb@3aAR' 
   }));
 
+app.use('/account', passport);
+app.use('/user', user);
+app.use('/book', book);
+app.use('/abuse', abuse);
+
 app.use(express.static(path.join(__dirname, '/public/html')));
 app.use(express.static(path.join(__dirname, '/public')));
 
-//app.use('/', routes);
-app.use('/account', passport);
-app.use('/users', user);
-app.use('/book', book);
-app.use('/abuse', abuse);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

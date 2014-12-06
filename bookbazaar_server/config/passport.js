@@ -8,6 +8,19 @@ var LocalStrategy = require('passport-local').Strategy;
 var mysql = require('mysql');
 var dbConnection = require('./database');
  
+
+passportConfig(passport);
+
+// POST: Create a new user account
+router.post('/signup', passport.authenticate('local-signup', 
+            { successRedirect: '/', failureRedirect: '/' }));
+
+
+// POST: Login to existing account
+router.post('/signin', passport.authenticate('local-login', 
+            { successRedirect: '/', failureRedirect: '/' }));
+
+
 // expose this function to our app using module.exports
 function passportConfig(passport) {
  
@@ -108,16 +121,5 @@ function passportConfig(passport) {
 		});
     }));
 };
-
-passportConfig(passport);
-
-// POST: Create a new user account
-router.post('/signup', passport.authenticate('local-signup', 
-            { successRedirect: '/', failureRedirect: '/login' }));
-
-
-// POST: Login to existing account
-router.post('/signin', passport.authenticate('local-login', 
-            { successRedirect: '/', failureRedirect: '/login' }));
 
 module.exports = router;

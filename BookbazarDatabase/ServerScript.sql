@@ -13,7 +13,7 @@ AND Baned = 0
 --create procedure dbo.Viewlistings (@Phonenumber)
 --AS
 --Viewlistings
-SELECT *
+SELECT 
 FROM Books
 JOIN Postings ON Book.Isbn = Posting.Books_ISBN
 WHERE User_PhoneNum = @Phonenumber
@@ -75,7 +75,7 @@ WHERE ABuse.AbUsersNumber = @AbUsersNumber
 --create procedure dbo.Search (@Input)
 --AS
 --search listings
-SELECT DISTINCT *
+SELECT DISTINCT `BookName`, `Author`, `FileName`, `Condition`, `Edition`, `TimePosted`, `Postings.User_PhoneNum`, `Price`
 FROM Book
 JOIN Postings ON Book.Isbn = Posting.Books_ISBN
 WHERE Isbn = @Input OR Bookname = @Input OR Author = @Input OR Condition = @Input OR Edition = @Input
