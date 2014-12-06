@@ -96,9 +96,9 @@ JOIN Postings ON Book.Isbn = Posting.Books_ISBN
 ORDER BY TimePosted DESC
 
 --Users data pull
-SELECT PhoneNum, FirstName, LastName, Street, City, State, ZipCode, IsAdmin, AvatarFilename 
+SELECT * 
 FROM Users 
-WHERE Password = @Password
+WHERE PhoneNum = @phonenumber
 
 --Create User
 INSERT INTO Users (PhoneNum, FirstName, LastName, Street, City, State, ZipCode, IsAdmin, AvatarFilename)

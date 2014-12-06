@@ -1,12 +1,15 @@
 // config/passport.js
 				
 // load all the things we need
+var express = require('express');
+var router = express.Router();
+var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mysql = require('mysql');
-var dbConnection = require('./app').dbConnection;
+var dbConnection = require('./database');
  
 // expose this function to our app using module.exports
-module.exports = function(passport) {
+function passportConfig(passport) {
  
 	// =========================================================================
     // passport session setup ==================================================
@@ -61,6 +64,10 @@ module.exports = function(passport) {
 				var insertQuery = "INSERT INTO Login ( UserName, Password, User_PhoneNum ) VALUES (?, ?, ?)";
                 var inserts = [email, password, req.body.phonenumber];
                 insertQuery = mysql.format(insertQuery, inserts);
+                insertQuery += "INSERT INTO Users (PhoneNum, Email, FirstName, LastName, Street, City, State, ZipCode, IsAdmin, AvatarFilename) ";
+                insertQuery += "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                inserts = [req.body.phonenumber, email, req.body.firstname, req.body.lastname, req.body.street, req.body.city, req.body.state, req.body.zipcode, req.body.isadmin, req.body.avatarfilename];
+                insertQuery = mysql.format(insertQuery, inserts);
 
 				console.log(insertQuery);
 				dbConnection.query(insertQuery,function(err,rows){
@@ -100,5 +107,17 @@ module.exports = function(passport) {
 		
 		});
     }));
- 
 };
+
+passportConfig(passport);
+
+// POST: Create a new user account
+router.post('/signup', passport.authenticate('local-signup', 
+            { successRedirect: '/', failureRedirect: '/login' }));
+
+
+// POST: Login to existing account
+router.post('/signin', passport.authenticate('local-login', 
+            { successRedirect: '/', failureRedirect: '/login' }));
+
+module.exports = router;
