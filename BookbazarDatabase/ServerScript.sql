@@ -75,6 +75,7 @@ JOIN Postings ON Books.Isbn = Postings.Books_ISBN
 WHERE lower(Isbn)= lower(@Input) 
 OR lower(Bookname) = lower(@Input) 
 OR lower(Author) = lower(@Input)
+OR lower(User_PhoneNum) = lower(@Input)
 ORDER BY TimePosted DESC
 
 
