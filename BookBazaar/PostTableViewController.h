@@ -16,10 +16,11 @@
     NSMutableData *_downloadedData;
     NSMutableArray *postInfo;
     NSMutableArray *objects;
-    
+    NSInteger *jsonCount;
 }
 
 
 @property (strong, nonatomic) IBOutlet UITableView *listTableView;
-
+-(void)downloadItems;
+-(bool)testReturnedSuccessfully;
 @end

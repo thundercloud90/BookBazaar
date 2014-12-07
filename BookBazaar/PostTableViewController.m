@@ -26,6 +26,7 @@
     listItems = [[NSArray alloc] init];
     postInfo = [[NSMutableArray alloc] init];
     [self downloadItems];
+    jsonCount = 0;
     
 }
 
@@ -129,7 +130,7 @@
         newPost.isbnNum = bookDict[@"Books_ISBN"];
         newPost.bookCondition = bookDict[@"Condition"];
         newPost.price = bookDict[@"Price"];
-
+        jsonCount += 1;
         [postInfo addObject:newPost];
     }
     
@@ -204,9 +205,16 @@
 }
 
 
--(void)fillData
+-(bool)testReturnedSuccessfully
 {
-    
+    if(jsonCount > 1)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
     
 }
 

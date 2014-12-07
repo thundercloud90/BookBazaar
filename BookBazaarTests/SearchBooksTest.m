@@ -1,5 +1,5 @@
 //
-//  MakePostTest.m
+//  SearchBooksTest.m
 //  BookBazaar
 //
 //  Created by Wade Wilkey on 6/12/2014.
@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "BookPostViewController.h"
+#import "PostTableViewController.h"
 
-@interface MakePostTest : XCTestCase
+@interface SearchBooksTest : XCTestCase
 
 @end
 
-@implementation MakePostTest
+@implementation SearchBooksTest
 
 - (void)setUp {
     [super setUp];
@@ -26,9 +26,11 @@
     [super tearDown];
 }
 
-- (void)testBookPost {
-    //Will be implemented when query is API is working for Postings Table.
-    XCTAssert(YES, @"Pass");
+- (void)testExample {
+    PostTableViewController *ptvc = [[PostTableViewController alloc] init];
+    [ptvc downloadItems];
+    bool isSuccessful = [ptvc testReturnedSuccessfully];
+    XCTAssertEqual(isSuccessful, YES, @"Successfully loaded");
 }
 
 - (void)testPerformanceExample {

@@ -15,6 +15,7 @@
 		FC283AEF1A30E3C900788936 /* ina.png in Resources */ = {isa = PBXBuildFile; fileRef = FC283AEE1A30E3C900788936 /* ina.png */; };
 		FC2CC2A11A33FB5900672702 /* RegisterUserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2CC2A01A33FB5900672702 /* RegisterUserTest.m */; };
 		FC2CC2A31A34033200672702 /* MakePostTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2CC2A21A34033200672702 /* MakePostTest.m */; };
+		FC2CC2A51A342F1100672702 /* SearchBooksTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2CC2A41A342F1100672702 /* SearchBooksTest.m */; };
 		FC32D50A19F973D1006240EB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32D50919F973D1006240EB /* LoginViewController.m */; };
 		FCAC757919E70B8500AA6AE7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAC757819E70B8500AA6AE7 /* main.m */; };
 		FCAC757C19E70B8500AA6AE7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAC757B19E70B8500AA6AE7 /* AppDelegate.m */; };
@@ -51,6 +52,7 @@
 		FC283AEE1A30E3C900788936 /* ina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ina.png; sourceTree = "<group>"; };
 		FC2CC2A01A33FB5900672702 /* RegisterUserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterUserTest.m; sourceTree = "<group>"; };
 		FC2CC2A21A34033200672702 /* MakePostTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakePostTest.m; sourceTree = "<group>"; };
+		FC2CC2A41A342F1100672702 /* SearchBooksTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBooksTest.m; sourceTree = "<group>"; };
 		FC32D50919F973D1006240EB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		FC32D50B19F9740E006240EB /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		FCAC757319E70B8500AA6AE7 /* BookBazaar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookBazaar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +159,7 @@
 				FCAC759219E70B8500AA6AE7 /* BookBazaarTests.m */,
 				FC14D3891A1C3D1D00F45993 /* LoginTest.m */,
 				FC2CC2A01A33FB5900672702 /* RegisterUserTest.m */,
+				FC2CC2A41A342F1100672702 /* SearchBooksTest.m */,
 				FC2CC2A21A34033200672702 /* MakePostTest.m */,
 				FCAC759019E70B8500AA6AE7 /* Supporting Files */,
 			);
@@ -291,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC2CC2A11A33FB5900672702 /* RegisterUserTest.m in Sources */,
+				FC2CC2A51A342F1100672702 /* SearchBooksTest.m in Sources */,
 				FC2CC2A31A34033200672702 /* MakePostTest.m in Sources */,
 				FCAC759319E70B8500AA6AE7 /* BookBazaarTests.m in Sources */,
 				FC14D38A1A1C3D1D00F45993 /* LoginTest.m in Sources */,
