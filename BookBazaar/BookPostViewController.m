@@ -31,19 +31,39 @@
     bookName = _bookNameTF.text;
     isbnNum = _isbnNumTF.text;
     bookPrice = _bookPriceTF.text;
+    author = _authorTF.text;
     bookCondition = _bookConditionTF.text;
+    
     [self insertDBItems];
+    
 }
 
 -(void)insertDBItems
 {
     
-    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/postService.php?query=INSERT INTO post (userID, ISBN_num, bookName, bookCondition, bookPrice) VALUES ('%@', '%@', '%@', '%@', '%@')", globalUser.userID, isbnNum, bookName, bookCondition, bookPrice];
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/postService.php?query=INSERT INTO post (PhoneNum, ISBN_num, bookName, bookCondition, bookPrice, bookAuthor) VALUES ('%@', '%@', '%@', '%@', '%@', '%@')", globalUser.phoneNumber, isbnNum, bookName, bookCondition, bookPrice, author];
     NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
     [NSURLConnection connectionWithRequest:urlRequest delegate:self];
     NSLog(@"%@", stringURL);
+     
+    /*
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/postService.php?query=INSERT INTO Books (ISBN, BookName, Author, Edition) VALUES ('%@', '%@', '%@', '%@')", isbnNum, bookName, author, @""];
+    NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
+    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
+    [NSURLConnection connectionWithRequest:urlRequest delegate:self];
+    NSLog(@"%@", stringURL);
+    
+    NSString * queryPost = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/postService.php?query=INSERT INTO Postings (Books_ISBN, Price, User_PhoneNum) VALUES ('%@', '%@', '%@')", isbnNum, bookPrice, globalUser.phoneNumber];
+    NSString * stringURLPost = [queryPost stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *jsonFileUrlPost = [NSURL URLWithString:stringURLPost];
+    NSURLRequest *urlRequestPost = [[NSURLRequest alloc] initWithURL:jsonFileUrlPost];
+    [NSURLConnection connectionWithRequest:urlRequestPost delegate:self];
+    NSLog(@"%@", stringURLPost);
+     */
+
 }
 
 #pragma mark NSURLConnectionDataProtocol Methods
@@ -69,8 +89,17 @@
                                                   otherButtonTitles:nil
                                   ,nil];
             [alert show];
-            //[_successLabel setHidden:NO];
-            //_successLabel.text = @"Registration Successful";
+            [self.navigationController popViewControllerAnimated:TRUE];
+
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Book Bazaar"
+                                                            message:@"Post Failed"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil
+                                  ,nil];
+            [alert show];
         }
         
 

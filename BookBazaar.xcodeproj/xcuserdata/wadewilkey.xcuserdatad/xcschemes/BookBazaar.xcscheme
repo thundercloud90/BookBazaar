@@ -51,6 +51,11 @@
                BlueprintName = "BookBazaarTests"
                ReferencedContainer = "container:BookBazaar.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "RegisterUserTest">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

@@ -14,6 +14,7 @@
     NSString *isbnNum;
     NSString *bookPrice;
     NSString *bookCondition;
+    NSString *author;
     NSMutableData *dbReturnCode;
 }
 @property (weak, nonatomic) IBOutlet UITextField *bookNameTF;

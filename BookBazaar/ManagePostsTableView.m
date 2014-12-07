@@ -56,16 +56,20 @@
 {
     // Download the json file
     //NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM post FULL JOIN user ON post.userID=user.id WHERE user.id='%@'", ];
-    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM post"];
+    //NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM post"];
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM Postings INNER JOIN Books ON Postings.Books_ISBN=Books.ISBN"];
+
     NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
     [NSURLConnection connectionWithRequest:urlRequest delegate:self];
 }
 
-- (void)removeItemFromDB:(NSString *)deletePostID
+- (void)removeItemFromDB:(NSString *)deletePostISBN
 {
-    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=DELETE FROM post WHERE postID='%@'", deletePostID];
+    //NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=DELETE FROM post WHERE postID='%@'", deletePostID];
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=DELETE FROM Postings WHERE Book_ISBN='%@'", deletePostISBN];
+
     NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
@@ -95,17 +99,26 @@
     for (int i = 0; i < jsonArray.count; i++)
     {
         NSDictionary *jsonElement = jsonArray[i];
-        
+        /*
         Post *newPost = [[Post alloc] init];
         newPost.bookName = jsonElement[@"bookName"];
         newPost.authorName = jsonElement[@"bookAuthor"];
-        newPost.postID = jsonElement[@"postID"];
+        //newPost.postID = jsonElement[@"postID"];
         newPost.isbnNum = jsonElement[@"ISBN_num"];
         newPost.bookCondition = jsonElement[@"bookCondition"];
-        newPost.timestamp = jsonElement[@"timestamp"];
+        //newPost.timestamp = jsonElement[@"timestamp"];
         newPost.price = jsonElement[@"bookPrice"];
         newPost.imagePath = jsonElement[@"imagePath"];
-        newPost.userID = jsonElement[@"userID"];
+        //newPost.userID = jsonElement[@"userID"];
+        */
+        
+        Post *newPost = [[Post alloc] init];
+        newPost.bookName = jsonElement[@"BookName"];
+        newPost.authorName = jsonElement[@"BookAuthor"];
+        newPost.isbnNum = jsonElement[@"ISBN"];
+        newPost.bookCondition = jsonElement[@"Condition"];
+        newPost.price = jsonElement[@"Price"];
+        newPost.imagePath = jsonElement[@"FileName"];
         
         [postInfo addObject:newPost];
     }
@@ -123,7 +136,7 @@
     UITableViewCell *myCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
 
     Post *post = postInfo[indexPath.row];
-    NSString *detailStr = [[NSString alloc] initWithFormat:@"UserID: %@", post.userID ];
+    NSString *detailStr = [[NSString alloc] initWithFormat:@"UserID: %@", post.bookName ];
     myCell.detailTextLabel.text = detailStr;
     myCell.textLabel.text = [post bookName];
     
@@ -150,7 +163,7 @@
         
         [alert show];
         Post *deletePost = [postInfo objectAtIndex:indexPath.row];
-        NSString *deletedPostID = deletePost.postID;
+        NSString *deletedPostID = deletePost.isbnNum;
          [postInfo removeObjectAtIndex:indexPath.row];
         [self removeItemFromDB:deletedPostID];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];

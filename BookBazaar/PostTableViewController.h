@@ -15,6 +15,7 @@
 {
     NSMutableData *_downloadedData;
     NSMutableArray *postInfo;
+    NSMutableArray *objects;
     
 }
 

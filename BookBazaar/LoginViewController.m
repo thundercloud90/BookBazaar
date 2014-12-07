@@ -44,11 +44,13 @@
 
 }
 
+
 -(void)validatePassword:(NSString *)correctPassword checkRights:(NSString *)adminCode
 {
     NSLog([NSString stringWithFormat:@"Entered: %@ Correct: %@", self.pWordTextField.text, correctPassword]);
     if([correctPassword isEqualToString:self.pWordTextField.text])
     {
+        /*
         NSString * username = self.uNameTextField.text;
         NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM user WHERE username='%@'", username];
         NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -56,6 +58,7 @@
         NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
         //[NSURLConnection connectionWithRequest:urlRequest delegate:self];
         _conn = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+        [_conn start];
         
         NSError *error;
         NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:downloadedData options:NSJSONReadingAllowFragments error:&error];
@@ -68,6 +71,7 @@
         globalUser.city = jsonElement2[@"city"];
         globalUser.state = jsonElement2[@"state"];
         globalUser.userID = jsonElement2[@"id"];
+         */
         
         if([adminCode  isEqual: @"1"])
         {
@@ -90,14 +94,29 @@
     }
 }
 
+
 -(void)downloadItems:(NSString*) username
 {
-    //NSString * username = self.uNameTextField.text;
+    
+    //Original!!!!
+    /*
     NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM user WHERE username='%@'", username];
     NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
-    [NSURLConnection connectionWithRequest:urlRequest delegate:self];
+    _conn = [NSURLConnection connectionWithRequest:urlRequest delegate:self];
+    [_conn start];
+     */
+    
+    
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM Users INNER JOIN Login ON Users.PhoneNum=Login.User_PhoneNum WHERE Login.UsersName='%@'", username];
+    NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
+    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
+    _conn = [NSURLConnection connectionWithRequest:urlRequest delegate:self];
+    [_conn start];
+    
+    
 }
 
 #pragma mark NSURLConnectionDataProtocol Methods
@@ -129,8 +148,16 @@
     {
         NSDictionary *jsonElement = jsonArray[i];
         
-        correctPassword = jsonElement[@"password"];
-        adminCode = jsonElement[@"isAdmin"];
+        correctPassword = jsonElement[@"Password"];
+        adminCode = jsonElement[@"IsAdmin"];
+        globalUser.firstName = [[NSString alloc] initWithString:jsonElement[@"FirstName"]];
+        globalUser.lastName = jsonElement[@"LastName"];
+        globalUser.emailAddr = jsonElement[@"Email"];
+        globalUser.phoneNumber = jsonElement[@"PhoneNum"];
+        globalUser.city = jsonElement[@"City"];
+        globalUser.state = jsonElement[@"State"];
+        //globalUser.userID = jsonElement[@"id"];
+        
      
     }
     

@@ -12,15 +12,15 @@
 
 @property (nonatomic, strong) NSString *bookName;
 @property (nonatomic, strong) NSString *authorName;
-@property (nonatomic, strong) NSString *postID;
+//@property (nonatomic, strong) NSString *postID;
 @property (nonatomic, strong) NSString *city;
 @property (nonatomic, strong) NSString *state;
 @property (nonatomic, strong) NSString *isbnNum;
 @property (nonatomic, strong) NSString *bookCondition;
-@property (nonatomic, strong) NSString *timestamp;
+//@property (nonatomic, strong) NSString *timestamp;
 @property (nonatomic, strong) NSString *price;
 @property (nonatomic, strong) NSString *imagePath;
-@property (nonatomic, strong) NSString *userID;
+//@property (nonatomic, strong) NSString *userID;
 
 
 @end

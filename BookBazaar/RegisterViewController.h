@@ -16,8 +16,10 @@
     NSString* phoneNum;
     NSString* username;
     NSString* password;
+    NSString *street;
     NSString *city;
     NSString *state;
+    NSString *zipcode;
     NSMutableData *downloadedData;
     bool submitClicked;
     bool usernameAvailable;
@@ -56,6 +58,7 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *statePicker;
 
 -(IBAction)textFieldReturn:(id)sender;
+-(NSString*)insertItems:(NSArray*)arr;
 
 
 @end

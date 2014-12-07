@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    NSLog(@"%@", _postObject.isbnNum);
     _booknameLabel.text = _postObject.bookName;
     _authorLabel.text = _postObject.authorName;
     _isbnLabel.text = _postObject.isbnNum;
@@ -45,7 +45,8 @@
 -(void)downloadItems
 {
     //NSString * username = self.uNameTextField.text;
-    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM user WHERE id='%@'", _postObject.userID];
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM Users JOIN Postings ON Users.PhoneNum=Postings.User_PhoneNum JOIN Books ON Postings.Books_ISBN=Books.ISBN WHERE Books.ISBN='%@'", _postObject.isbnNum];
+    //NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM user WHERE id='%@'", _postObject.userID];
     NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
@@ -69,16 +70,44 @@
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:downloadedData options:NSJSONReadingAllowFragments error:&error];
     NSDictionary *jsonElement = jsonArray[0];
     
-    _usernameLabel.text = jsonElement[@"username"];
-    _cityLabel.text = jsonElement[@"city"];
-    _phoneLabel.text = jsonElement[@"phoneNumber"];
-    _emailLabel.text = jsonElement[@"emailAddr"];
+    _usernameLabel.text = jsonElement[@"UsersName"];
+    _cityLabel.text = jsonElement[@"City"];
+    _phoneLabel.text = jsonElement[@"PhoneNum"];
+    _emailLabel.text = jsonElement[@"Email"];
+    
+    //[self imageThread];
+   
+    
+
+}
+
+-(void)imageThread
+{
     
     
-    NSData* imageData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:@"http://67.182.205.14/cs3450/bookImages/photo2.JPG"]];
-    
-    [self bookImage].image = [[UIImage alloc] initWithData:imageData];
-    [_activityIndic stopAnimating];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        //Call your function or whatever work that needs to be done
+        //Code in this part is run on a background thread
+        /*
+        if([_postObject.imagePath isEqual:nil])
+        {
+            [self bookImage].image = [UIImage imageNamed:@"ina.png"];
+        }
+        else{
+         */
+         NSData* imageData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://67.182.205.14/cs3450/bookImages/%@", _postObject.imagePath]]];
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            
+            //Stop your activity indicator or anything else with the GUI
+            //Code here is run on the main thread
+            [self bookImage].image = [[UIImage alloc] initWithData:imageData];
+            [_activityIndic stopAnimating];
+            
+        });
+    });
 }
 
 

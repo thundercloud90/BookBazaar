@@ -7,7 +7,7 @@
 //
 
 #import "RegisterViewController.h"
-#define kOFFSET_FOR_KEYBOARD 280.0
+
 
 @interface RegisterViewController ()
 
@@ -27,7 +27,7 @@
     [_cityErrorLabel setHidden:YES];
     [_unErrorLabel setHidden:YES];
     [_nullPWErrorLabel setHidden:YES];
-    [_usernameTF setDelegate:self];
+    [_phoneNumTF setDelegate:self];
     submitClicked = NO;
     usernameAvailable = NO;
     nullField = YES;
@@ -48,16 +48,49 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(NSString*)testInsert:(NSArray*)testArr
+{
+    firstName = testArr[0];
+    lastName = testArr[1];
+    emailAddr = testArr[2];
+    phoneNum = testArr[3];
+    city = testArr[4];
+    state = testArr[5];
+    zipcode = testArr[6];
+    password = testArr[7];
+    
+    [self insertDBItems];
+    if(![downloadedData isEqual:[NSNull null]])
+    {
+        return @"Success";
+    }
+    else
+    {
+        return @"Failure";
+    }
+    
+}
 
 
 -(void)insertDBItems
 {
-    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/postService.php?query=INSERT INTO user (username, password, firstName, lastName, emailAddr, phoneNumber, city, state) VALUES ('%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')", username, password, firstName, lastName, emailAddr, phoneNum, city, @"UT"];
+    //NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/postService.php?query=INSERT INTO user (username, password, firstName, lastName, emailAddr, phoneNumber, city, state) VALUES ('%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')", username, password, firstName, lastName, emailAddr, phoneNum, city, @"UT"];
+    
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/postService.php?query=INSERT INTO Login ( `UserName`, `Password`, `User_PhoneNum` ) VALUES ('%@', '%@', '%@') ", emailAddr, password, phoneNum];
     NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
     [NSURLConnection connectionWithRequest:urlRequest delegate:self];
+    
+    NSString * queryPost = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/postService.php?query=INSERT INTO Users (`PhoneNum`, `Email`, `FirstName`, `LastName`, `City`, `State`, `ZipCode`, `IsAdmin`)  VALUES ('%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@')", phoneNum, emailAddr, firstName, lastName, city, state, zipcode];
+    NSString * stringURLPost = [queryPost stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *jsonFileUrlPost = [NSURL URLWithString:stringURLPost];
+    NSURLRequest *urlRequestPost = [[NSURLRequest alloc] initWithURL:jsonFileUrlPost];
+    [NSURLConnection connectionWithRequest:urlRequestPost delegate:self];
+    NSLog(@"%@", stringURLPost);
+     
 }
+     
 
 #pragma mark NSURLConnectionDataProtocol Methods
 
@@ -129,10 +162,11 @@
 }
 
 - (IBAction)textDidChange:(id)sender {
-    username = _usernameTF.text;
-    if(![username isEqualToString:@""])
+    //username = _usernameTF.text;
+    phoneNum = _phoneNumTF.text;
+    if(![phoneNum isEqualToString:@""])
     {
-    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM user WHERE username='%@'", username];
+    NSString * query = [NSString stringWithFormat:@"http://67.182.205.14/cs3450/service.php?query=SELECT * FROM Login WHERE UsersName='%@'", phoneNum];
     NSString * stringURL = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *jsonFileUrl = [NSURL URLWithString:stringURL];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
@@ -287,60 +321,5 @@
 {
     [sender resignFirstResponder];
 }
-
--(void)setViewMovedUp:(BOOL)movedUp
-{
-    [UIView beginAnimations:nil context:NULL];
-    
-    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
-    
-    CGRect rect = self.view.frame;
-    
-    if (movedUp)
-    {
-        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
-        // 2. increase the size of the view so that the area behind the keyboard is covered up.
-        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-        rect.size.height += kOFFSET_FOR_KEYBOARD;
-    }
-    else
-    {
-        // revert back to the normal state.
-        rect.origin.y += kOFFSET_FOR_KEYBOARD;
-        rect.size.height -= kOFFSET_FOR_KEYBOARD;
-    }
-    self.view.frame = rect;
-    
-    [UIView commitAnimations];
-}
-
-
--(void)textFieldDidEndEditing:(UITextField *)sender
-{
-    if  (self.view.frame.origin.y >= 0)
-    {
-        [self setViewMovedUp:NO];
-    }
-}
-
--(void)textFieldDidBeginEditing:(UITextField *)sender
-{
-    //move the main view, so that the keyboard does not hide it.
-    if  (self.view.frame.origin.y >= 0)
-    {
-        [self setViewMovedUp:YES];
-    }
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 
 @end
