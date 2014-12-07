@@ -4,7 +4,7 @@ This is my first project using Node. It was designed to work with a
 particular mysql database allowing both a website and a mobile app
 to access the database. It's not a perfect API as a lot more error 
 checking would be done on the server. But for this project the error 
-checking was all done on the front end. In hinde site we should have
+checking was all done on the front end. In hindsight we should have
 done it differently.
 
 ##### How to run the server:
@@ -15,8 +15,7 @@ done it differently.
 4. Once that completes type **node app.js**.
 5. The server should now be running on your localhost. 
 
-#####You can access the different APIs by using HTTP GET and POST to this
-#####base URL: 
+#####You can access the different APIs by using HTTP GET and POST to this base URL: 
 
 1. On your local machine: localhost:3000 
 2. Not local... : (ip address):3000
