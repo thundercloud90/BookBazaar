@@ -104,15 +104,34 @@ router.post('/delete', function (req, res, next) {
 
 // GET: search for a book
 router.get('/search', function (req, res, next){
-	var sql = "SELECT DISTINCT * "
-	sql += "FROM Books JOIN Postings ON `Books`.`ISBN` = `Postings`.`Books_ISBN` ";
-	sql += "WHERE `ISBN` LIKE ? OR `BookName` = ? OR `Author` LIKE ? OR `Condition` LIKE ? OR `Edition` LIKE ? ";
-	sql += "ORDER BY `Timeposted` DESC";
-	var inserts = [req.query.isbn !== undefined ? req.query.isbn : ""];
-	inserts.push(req.query.bookname !== undefined ? req.query.bookname : "");
-	inserts.push(req.query.author !== undefined ? req.query.author : "");
-	inserts.push(req.query.condition !== undefined ? req.query.condition : "");
-	inserts.push(req.query.edition !== undefined ? req.query.edition : "");
+	var sql = "SELECT * FROM Books JOIN Postings ON `Books`.`ISBN` = `Postings`.`Books_ISBN` WHERE ";
+	var inserts = [];
+
+	var n = 0;
+	if(req.query.isbn !== undefined && req.query.isbn != ""){
+		sql += "`ISBN` LIKE ? OR ";
+		inserts.push(req.query.isbn);
+		n = 1;
+	}
+	if(req.query.bookname !== undefined && req.query.bookname != ""){
+		sql += "`BookName` LIKE ? OR ";
+		inserts.push(req.query.bookname);
+		n = 1;
+	}
+	if(req.query.author !== undefined && req.query.author != ""){
+		sql += "`Author` LIKE ? OR ";
+		inserts.push(req.query.author);
+		n = 1;
+	}
+	if(req.query.phonenumber !== undefined && req.query.phonenumber != ""){
+		sql += "`User_PhoneNum` LIKE ? OR ";
+		inserts.push(req.query.phonenumber);
+		n = 1;
+	}
+
+	// cuts off the last " OR " no matter what
+	sql = sql.slice(0, -4);
+
 	sql = mysql.format(sql, inserts);
 	console.log(sql);
 
